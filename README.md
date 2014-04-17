@@ -1,6 +1,30 @@
 AnguGrails: A starting point for single page AngularJS/Grails application
 =========================================================================
 
+Try it out
+-----------
+
+  * Make sure you have grails 2.3.7 installed and working locally.
+  * Clone this project
+  * The default configuration uses an in memory h2 database that is recreated each time you run the server,
+    thus losing any new users you created. This makes it easier to get going, though.
+  * grails run-app
+  * browse to http://localhost:8080/angugrails/ to see the default grails page and list of controllers
+  * click on the Home controller.
+  * Click on the Sign Up tab at the top.
+  * Create a new account.
+  * Try using that account to login and logout.
+
+
+Persistent Database
+-------------------
+
+  * If you want you could change the DataSource url to use an in memory store for h2d.
+  * You could add code to bootstrap so that it loads a set of standard development data each time the db
+    is recreated.
+  * This project includes configuration for mysql, as well as lines in BuildConfig.groovy for mysql to uncomment.
+  * If you use a persistent database, you can build the tables with the command: grails dbm-update
+
 Server Features
 ----------------
 

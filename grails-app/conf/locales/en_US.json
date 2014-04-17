@@ -2,7 +2,7 @@
     "HOME_TITLE": "This is the Home page!",
     "HOME_CONTENT": "This is the home page content, which can only be seen while you are authenticated.",
 
-    "LOGIN_TITLE": "Please Sign In to Angrails",
+    "LOGIN_TITLE": "Please Sign In to AnguGrails",
     "LOGIN_BUTTON": "Login",
 
     "LOGOUT_TITLE": "Sign Out",

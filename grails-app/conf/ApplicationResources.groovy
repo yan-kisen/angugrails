@@ -23,8 +23,6 @@ modules = {
 
     'angugrails' {
         dependsOn('angular-app')
-        dependsOn('angular-translate')
-        dependsOn('angular-validation')
         resource url: 'js/ng-app/angugrails.js', nominify:true
         resource url: 'js/ng-app/language-translation.js', nominify: true
         resource url: 'js/ng-app/services/web-service-util.js', nominify:true
