@@ -1,6 +1,7 @@
 AnguGrails: A starting point for single page AngularJS/Grails application
 =========================================================================
 
+
 Try it out
 -----------
 
@@ -35,6 +36,7 @@ Server Features
   * serves the css and html web templates for the client application.
   * the HomeController index action returns the one page angularjs application.
   * once the app starts, it makes rest calls to the api actions.
+  * serves the locale file for the language localization.
 
 
 Client Features and Modules
@@ -73,6 +75,18 @@ spelled out explicitly and this seems to work better.
 
 The default grails index page is still provided by the project.
 
+The javascript for the client application and web templates are all under the web-app
+directory on the server. The structure looks like this:
+
+
+web-app/lib/(all javascript angular related libraries here)
+web-app/js/ng-app/controllers
+web-app/js/ng-app/directives
+web-app/js/ng-app/angugrails.js - main application file that creates the angugrails module.
+
+web-app/views/ - all of the view templates downloaded by the angular app are stored here on
+   the server. currently no authentication is required to download these.
+
 
 Client Project Structure
 ------------------------
@@ -92,13 +106,6 @@ the current logged in user and share that in their scope with the views.
 
 The views will be updated by the changes to scope data and state.
 
-web-app/lib/(all javascript angular related libraries here)
-web-app/js/ng-app/controllers
-web-app/js/ng-app/directives
-web-app/js/ng-app/angugrails.js - main application file that creates the angugrails module.
-
-web-app/views/ - all of the view templates downloaded by the angular app are stored here on
-   the server. currently no authentication is required to download these.
 
 
 
