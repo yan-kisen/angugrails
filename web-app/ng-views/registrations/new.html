@@ -1,0 +1,48 @@
+<div class="col-md-8 col-md-offset-2">
+    <h2>{{ 'REGISTER_TITLE' | translate }}</h2>
+
+    <div class="alert alert-danger" ng-show="errorMessage">
+        {{ errorMessage }}
+    </div>
+    <form role="form" class="form-horizontal" name="registerForm" ng-submit="register()" novalidate>
+        <div class="form-group">
+            <label for="username" class="col-md-3 control-label">Username</label>
+            <div>
+                <input type="username" id="username" name="username" class="col-md-3" placeholder="Username"
+                       ng-model="registration.username" validation="min_len:3|required"/>
+                <span class="validation text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="col-md-3 control-label">Email</label>
+            <div>
+                <input type="email" id="email" name="email" class="col-md-3" placeholder="Email"
+                       ng-model="registration.email" validation="email|min_len:3|required"/>
+                <span class="validation text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Password</label>
+            <div>
+                <input type="password" id="password" class="col-md-3" name="password" placeholder="Password"
+                       ng-model="registration.password" validation="alpha_dash_spaces|required"/>
+                <span class="validation text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password_confirm" class="col-md-3 control-label">Confirm Password</label>
+            <div>
+                <input type="password" id="password_confirm" class="col-md-3" name="password_confirm"
+                       placeholder="Password" ng-model="registration.passwordConfirm"
+                       validation="alpha_dash_spaces|required"/>
+                <span class="validation text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-6">
+                <button type="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">{{ 'REGISTER_BUTTON' | translate }}</button>
+            </div>
+        </div>
+    </form>
+    ​
+</div>

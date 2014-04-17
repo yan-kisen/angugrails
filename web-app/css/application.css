@@ -1,0 +1,12 @@
+.center-block {
+    float: none;
+}
+
+.navbar-right {
+    float: right;
+    padding-right: 30px;
+}
+
+.text-danger {
+    padding-left: 10px;
+}

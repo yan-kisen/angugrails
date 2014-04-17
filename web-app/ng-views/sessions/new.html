@@ -1,0 +1,33 @@
+<div class="col-md-8 col-md-offset-2">
+    <div class="row">
+        <h2 class="col-md-7 col-md-offset-1">{{ 'LOGIN_TITLE' | translate }}</h2>
+    </div>
+    <div class="row">
+        <div class="alert alert-danger col-md-6 col-md-offset-1" ng-show="errorMessage">
+            {{ errorMessage }}
+        </div>
+    </div>
+    <form role="form" name="loginForm" class="form-horizontal" ng-submit="login()" novalidate>
+        <div class="form-group">
+            <label for="username" class="col-md-3 control-label">User Name</label>
+            <div>
+                <input class="col-md-3" type="text" id="username" name="username" placeholder="MemberName"
+                       ng-model="credentials.username" validation="min_len:3|required" validation-event="blur">
+                <span class="validation text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Password</label>
+            <div>
+                <input class="col-md-3" type="password" id="password" name="password" placeholder="Password"
+                       ng-model="credentials.password" ng-minlength="2" validation="min_len:2|required">
+                <span class="validation text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-3 col-md-6">
+                <button type="submit" class="btn btn-primary col-md-3"  ng-disabled="loginForm.$invalid">{{ 'LOGIN_BUTTON' | translate }}</button>
+            </div>
+        </div>
+    </form>  ​
+</div>

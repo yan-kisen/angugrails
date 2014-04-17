@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="navbar navbar-default" bs-navbar>
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/"></a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li data-match-route="/(:?home)"><a ui-sref="home">Home</a></li>
+                    <li data-match-route="/login" ng-hide="isAuthenticated"><a  ui-sref="login">Login</a></li>
+                    <li data-match-route="/logout" ng-show="isAuthenticated"><a ui-sref="logout">Logout</a></li>
+                    <li data-match-route="/register" ng-hide="isAuthenticated"><a  ui-sref="register">Sign up</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-show="isAuthenticated">
+                    <li><a ui-sref="changePassword">Change Password</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

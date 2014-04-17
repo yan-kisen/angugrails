@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet author="ryangrow (generated)" id="1394569922102-1">
+         <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="userPK"/>
+            </column>
+            <column name="version" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_expired" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="account_locked" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password_expired" type="bit">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-2">
+        <createTable tableName="user_role">
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-3">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rolePK"/>
+            </column>
+            <column name="version" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-4">
+        <addPrimaryKey columnNames="role_id, user_id" constraintName="user" tableName="user_role"/>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-7">
+        <createIndex indexName="email_uniq_1394569922044" tableName="user" unique="true">
+            <column name="email"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-8">
+        <createIndex indexName="username_uniq_1394569922049" tableName="user" unique="true">
+            <column name="username"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-9">
+        <createIndex indexName="FK527E3EFB24865BBE" tableName="user_role">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-10">
+        <createIndex indexName="FK527E3EFBD37F7F3E" tableName="user_role">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-11">
+        <createIndex indexName="authority_uniq_1394569922057" tableName="role" unique="true">
+            <column name="authority"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-5">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="FK527E3EFB24865BBE" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user" referencesUniqueColumn="false"/>
+    </changeSet>
+    <changeSet author="ryangrow (generated)" id="1394569922102-6">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role" constraintName="FK527E3EFBD37F7F3E" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role" referencesUniqueColumn="false"/>
+    </changeSet>
+
+    <changeSet author="ryangrow (generated)" id="1395701083678-1">
+        <createTable tableName="authentication_token">
+            <column autoIncrement="true" name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="authenticatioPK"/>
+            </column>
+            <column name="version" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token_value" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
