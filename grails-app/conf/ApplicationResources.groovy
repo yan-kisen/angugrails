@@ -18,11 +18,15 @@ modules = {
         resource url:"js/lib/autofill-event.js"
         resource url:"js/lib/angular-translate.js", nominify: true
         resource url:"js/lib/angular-translate-loader-url.js", nominify: true
+    }
+
+    'angular-validation' {
         resource url:"js/lib/angular-validation.js", nominify: true
     }
 
     'angugrails' {
         dependsOn('angular-app')
+        dependsOn('angular-validation')
         resource url: 'js/ng-app/angugrails.js', nominify:true
         resource url: 'js/ng-app/language-translation.js', nominify: true
         resource url: 'js/ng-app/services/web-service-util.js', nominify:true

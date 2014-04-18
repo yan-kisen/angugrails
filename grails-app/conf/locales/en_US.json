@@ -1,9 +1,18 @@
 {
+
+    "NAV_HOME_LABEL": "Home",
+    "NAV_LOGIN_LABEL": "Sign In",
+    "NAV_REGISTER_LABEL": "Sign Up",
+    "NAV_LOGOUT_LABEL": "Log Out",
+    "NAV_CHANGE_PROFILE": "Edit Profile",
+
     "HOME_TITLE": "This is the Home page!",
     "HOME_CONTENT": "This is the home page content, which can only be seen while you are authenticated.",
 
     "LOGIN_TITLE": "Please Sign In to AnguGrails",
     "LOGIN_BUTTON": "Login",
+    "USERNAME_LABEL": "Username",
+    "PASSWORD_LABEL": "Password",
 
     "LOGOUT_TITLE": "Sign Out",
     "LOGOUT_BUTTON": "Sign Out",
@@ -11,9 +20,14 @@
 
     "REGISTER_TITLE": "Sign Up for AnguGrails",
     "REGISTER_BUTTON": "Sign Up",
+    "EMAIL_LABEL": "Email Address",
+    "CONFIRM_PASSWORD_LABEL": "Confirm Password",
 
     "CHANGE_PASSWORD_TITLE": "Change your AnguGrails Password",
     "CHANGE_PASSWORD_BUTTON": "Save",
+    "CURRENT_PASSWORD_LABEL": "Current Password",
+    "NEW_PASSWORD_LABEL": "New Password",
+    "CONFIRM_NEW_PASSWORD_LABEL": "Confirm New Password",
 
 
     "INVALID_ALPHA":            "May only contain letters. ",
@@ -43,5 +57,6 @@
     "INVALID_NUMERIC_SIGNED":   "Must be a positive or negative number. ",
     "INVALID_PATTERN":          "Must be following this format: :param. ",
     "INVALID_REQUIRED":         "Field is required. ",
+    "INVALID_SAME":             "Must match :param.",
     "INVALID_URL":              "Must be a valid URL. "
 }

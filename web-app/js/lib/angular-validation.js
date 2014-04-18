@@ -22,9 +22,24 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                 // define the variables we'll use
                 var messages = [];
                 var patterns = [];
+                var validators = [];
                 var regexMessage;
                 var regexPattern;
                 var validations;
+                var compareField;
+
+                var matchPatternValidator = function(pattern, value) {
+                    var regex = new RegExp(pattern, 'i');
+                    return regex.test(value);
+                };
+
+                var requiredValidator = function(pattern, value) {
+                    return ((typeof value !== "undefined") && (value !== ""));
+                };
+
+                var sameValidator = function(element, value) {
+                    return value === element.val();
+                };
 
                 // by default we'll consider field not required if not required then no need to validate empty value..right
                 // if validation attribute calls it then we'll validate
@@ -50,6 +65,7 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                 if(validations) {
                     for(var i = 0, ln = validations.length; i < ln; i++) {
                         var params = validations[i].split(':');
+                        validators[i] =  matchPatternValidator // the default validator and covers all but two cases
                         switch(params[0]) {
                             case "alpha" :
                                 patterns[i] = "^([a-zÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ])+$";
@@ -227,9 +243,18 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                                 break;
                             case "required" :
                                 isFieldRequired = true;
+                                validators[i] = requiredValidator;
                                 patterns[i] = "\\S+";
                                 messages[i] = {
                                     message: 'INVALID_REQUIRED'
+                                };
+                                break;
+                            case "same":
+                                validators[i] = sameValidator;
+                                patterns[i] = angular.element(document.querySelector('#'+params[1]));
+                                messages[i] = {
+                                    message: 'INVALID_SAME',
+                                    params: [params[2]] // key for parameter replacement.
                                 };
                                 break;
                             case "url" :
@@ -242,6 +267,8 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                     }
                 }
 
+
+
                 /** Validate function, from the input value it will go through all validators (separated by pipe)
                  *  that were passed to the input element and will validate it. If field is invalid it will update
                  *  the error text of the span/div element dedicated for that error display.
@@ -251,25 +278,24 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                     var isValid = true;
                     var isFieldValid = true;
                     var message = "";
-                    var regex;
+                    var maxErrors = 1;
+                    var errorCount = 0;
 
-                    // loop through all validations (could be multiple)
-                    // run the Regex test through each iteration
-                    for(var j = 0, jln = patterns.length; j < jln; j++) {
-                        regex = new RegExp(patterns[j], 'i');
-                        isValid = (patterns[j] === "required" && typeof value === "undefined") ? false : regex.test(value);
-                        if(!isValid) {
+                    // loop through and apply all validations (could be multiple)
+                    // this goes in reverse, which maps to the same order they appeared on the attribute,
+                    // with the exception of regex patterns that get applied first.
+                    for(var j = 0, jln = patterns.length; (j < jln ) && (errorCount < maxErrors); j++) {
+
+                        if(!validators[j](patterns[j], value)) {
                             isFieldValid = false;
-                            var debug =   $translate(messages[j].message);
-                            message +=  debug;
-
+                            message +=  $translate(messages[j].message);
                             // replace any error message params that were passed
                             if(typeof messages[j].params !== "undefined") {
                                 for(var k = 0, kln = messages[j].params.length; k < kln; k++) {
-                                    message = message.replace((':param'), messages[j].params[k]);
+                                    message = message.replace((':param'), $translate(messages[j].params[k]));
                                 }
                             }
-
+                            errorCount++;
                         } // end !isValid
                     } // end for loop
 
@@ -279,6 +305,9 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
 
                     return isFieldValid;
                 }
+
+
+
 
                 /** in general we will display error message at the next element after our input
                  * but in some cases user want to define which DOM id to display error (as validation attribute)
