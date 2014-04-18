@@ -1,21 +1,24 @@
-AnguGrails: A starting point for single page AngularJS/Grails application
-=========================================================================
+#AnguGrails
+`Version: 0.1 Alpha`
 
-What is this?
--------------
+A sample application using Grails 2.3.7 with Spring security 2.0 on the server side to implement a REST API and serves
+resources for a single page application on the client using AngularJS. This application implements the following
+stories, as separate angular-ui-router states:
 
-This is the result of my research and development to put together a single page web application using
-the current state of the art web and development technologies as of Spring 2014. 
+  * User registration ( no email confirmation sent )
+  * Login
+  * Logout
+  * Change Password
+  * View home page
 
-There are now so many different frameworks for both client side and server side development that
-the choices can be confusing. For most frameworks, it probably doesn't matter which ones you choose
-as long as you know how to use the ones you have selected and you understand the security requirements
-and choices that are made by your implementation.  This sample application uses AngularJS for the client
-side single page app, and the Groovy on Grails environment for the server side.
+All text in the application is localized using the angular-translate library with the url loader for
+translations.
 
 Nothing in this project is original, but is made up from bits and pieces of blogs and sample projects and
-StackOverflow questions and answers that I have found online. Hopefully I have packaged these bits and pieces
-in such a way that it is useful to somebody besides myself.
+StackOverflow questions and answers that I have found online. This is the result of my research and development
+to put together a single page web application using some of the current state of the art web and development
+technologies as of Spring 2014. Hopefully I have packaged these bits and pieces in such a way that it is useful to
+somebody else.
 
 As I have time, or if I have time, I will implement the TBD section. Any feedback is welcome.
 
@@ -24,7 +27,7 @@ Try it out
 -----------
 
   * Make sure you have grails 2.3.7 installed and working locally.
-  * Clone this project
+  * Clone this github project to your local environment.
   * The default configuration uses an in memory h2 database that is recreated each time you run the server,
     thus losing any new users you created. If you use this for any real development, you will want to edit
     the bootstrap.groovy file to create baseline set of development data on startup each time.
@@ -74,7 +77,7 @@ Server Features
   * database-migration:1.3.8: grails database migrations for building the user authentication db objects.
   * serves the css and html web templates for the client application.
   * the HomeController index action returns the one page angularjs application.
-  * once the app starts, it makes rest calls to the api actions.
+  * once the browser app starts, it makes rest calls to the api actions.
   * serves the locale file for the language localization vi the LocaleController.
 
 
@@ -85,24 +88,26 @@ Client Features and Modules
   * bootstrap 3
   * angular-ui-router v0.2.8: plugin for managing states of the client ui.
   * angular-translate v1.1.1: I18N and localization of AngularJS app.
-  * angular-translate-loader-url: v2.1.0: client app pulls down json translation resources.
-  * angular-validation: v1.0 beta: interesting plugin but needs more validations such as password confirmation.
-  * uses two views and controllers per state, where one view and controller is for nav bar.
+  * angular-translate-loader-url: v2.1.0: client app pulls down json translation resources from LocaleController.
+  * angular-validation: v1.0 beta: I have hacked in password confirmation, and limiting one error message in order,
+                                   also added translate on message parameter keys.
+  * state management: uses two views and controllers per state, where one view and controller is for nav bar,
+                      and the other view and controller represent the workspace beneath the navbar.
   * single page app implements sign up new user, login, logout, change password,
     and access controlled home page.
 
-TBD
----
+TBD, maybe someday
+------------------
 
   * implement unit and functional testing across all modules.
   * improved server validation error handling.
-  * complete form validation for password/password confirm compare.
   * deployed demo.
   * localize error messages from server.
   * cross browser and mobile test.
   * email confirmation of new registrations.
   * reset auth token when changing password to force relogin.
   * transition animations.
+  * implement this as a grails plugin.
 
 
 Server Project Structure
