@@ -1,20 +1,20 @@
 //
 angular.module('angugrails.controllers').
-    controller('LogoutCtrl', function LogoutController ($scope, $state, $log, WebService) {
+    controller('LogoutCtrl',function LogoutController($scope, $state, $log, WebService) {
 
 
-        $scope.logout = function() {
+        $scope.logout = function () {
             WebService.logout().then(
-                function() {
+                function () {
                     $state.go('login');
                 },
-                function() {
+                function () {
                     $state.go('login');
                 }
             )
         };
     }).
-    config(['$stateProvider', function( $stateProvider ) {
+    config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state(
             'logout', {
                 views: {

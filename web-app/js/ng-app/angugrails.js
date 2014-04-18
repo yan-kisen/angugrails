@@ -20,11 +20,10 @@ var App = angular.module('angugrails', [
 ]);
 
 
-
 // focus on the first input when the page loads
-window.focus = function(selector) {
+window.focus = function (selector) {
     // timeout is needed for Chrome (is a bug in Chrome)
-    setTimeout(function(){
+    setTimeout(function () {
         $(!!selector ? selector : '[autofocus]:not(:focus)').first().focus();
     }, 1);
 };

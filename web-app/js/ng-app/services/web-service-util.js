@@ -1,7 +1,7 @@
 /**
  * WebService - a module of methods for authenticating with and using the server's web service endpoints.
  */
-angular.module('angugrails.services').service('WebServiceUtil', function($http, $log) {
+angular.module('angugrails.services').service('WebServiceUtil', function ($http, $log) {
 
 
     /**
@@ -11,7 +11,7 @@ angular.module('angugrails.services').service('WebServiceUtil', function($http, 
      * @returns {Object} attributes of return object are reason, httpError, errors array.
      * @private
      */
-    this.handleHttpError = function(response) {
+    this.handleHttpError = function (response) {
         var description;
         var httpError = response.status;
 
@@ -19,7 +19,7 @@ angular.module('angugrails.services').service('WebServiceUtil', function($http, 
             description = "Please correct errors.";
         } else if (response.status == 400) {
             description = "Unexpected application error.";
-        }  else if (response.status == 404) {
+        } else if (response.status == 404) {
             description = "Url not found. Unexpected application error.";
         } else if (response.status == 500) {
             description = "Unexpected server error.";
@@ -32,4 +32,4 @@ angular.module('angugrails.services').service('WebServiceUtil', function($http, 
         return { httpError: httpError, description: description, errors: response.data.errors };
     };
 
-}) ;
+});

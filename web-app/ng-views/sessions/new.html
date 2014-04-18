@@ -10,6 +10,7 @@
     <form role="form" name="loginForm" class="form-horizontal" ng-submit="login()" novalidate>
         <div class="form-group">
             <label for="username" class="col-md-3 control-label">{{ 'USERNAME_LABEL' | translate }}</label>
+
             <div>
                 <input class="col-md-3" type="text" id="username" name="username" placeholder="MemberName"
                        ng-model="credentials.username" validation="required" validation-event="blur">
@@ -18,6 +19,7 @@
         </div>
         <div class="form-group">
             <label for="password" class="col-md-3 control-label">{{ 'PASSWORD_LABEL' | translate }}</label>
+
             <div>
                 <input class="col-md-3" type="password" id="password" name="password" placeholder="Password"
                        ng-model="credentials.password" validation="required">
@@ -26,8 +28,11 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-3 col-md-6">
-                <button type="submit" class="btn btn-primary col-md-3"  ng-disabled="loginForm.$invalid">{{ 'LOGIN_BUTTON' | translate }}</button>
+                <button type="submit" class="btn btn-primary col-md-3" ng-disabled="loginForm.$invalid">
+                    {{ 'LOGIN_BUTTON' | translate }}
+                </button>
             </div>
         </div>
-    </form>  ​
+    </form>
+    ​
 </div>

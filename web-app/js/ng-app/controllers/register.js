@@ -1,8 +1,8 @@
 //
 angular.module('angugrails.controllers').
-    controller('RegisterCtrl', function RegisterController ($scope, $state, $log, WebService) {
+    controller('RegisterCtrl',function RegisterController($scope, $state, $log, WebService) {
 
-        $scope.reset = function()  {
+        $scope.reset = function () {
             $scope.registration = {username: null, email: null, password: null, passwordConfirm: null};
             $scope.errorMessage = "";
             $scope.submitted = false;
@@ -10,17 +10,17 @@ angular.module('angugrails.controllers').
 
         $scope.reset();
 
-        $scope.register = function() {
+        $scope.register = function () {
             $('input').checkAndTriggerAutoFillEvent();
             $scope.errorMessage = "";
             $scope.submitted = true;
             if ($scope.registerForm.$valid) {
                 return WebService.register($scope.registration.username,
-                                           $scope.registration.email,
-                                           $scope.registration.password).
-                    then(function() {
+                        $scope.registration.email,
+                        $scope.registration.password).
+                    then(function () {
                         $state.go('home');
-                    }, function(response) {
+                    }, function (response) {
                         $scope.errorMessage = response.description;
                     });
             } else {
@@ -28,13 +28,13 @@ angular.module('angugrails.controllers').
             }
         };
     }).
-    config(['$stateProvider', function( $stateProvider ) {
+    config(['$stateProvider', function ($stateProvider) {
         $stateProvider.state(
             'register', {
                 noAuthRequired: true,
                 views: {
                     "navigation": { templateUrl: '/angugrails/ng-views/navigation.html', controller: 'NavigationCtrl'},
-                    "content": { templateUrl:  '/angugrails/ng-views/registrations/new.html', controller: 'RegisterCtrl'}
+                    "content": { templateUrl: '/angugrails/ng-views/registrations/new.html', controller: 'RegisterCtrl'}
                 }
             });
     }]);
