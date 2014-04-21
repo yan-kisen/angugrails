@@ -25,32 +25,6 @@ class UserControllerSpec extends Specification {
         response.status ==  403
     }
 
-
-    void "test save user happy path"() {
-        def userServiceMock= mockFor(UserService)
-        userServiceMock.demandExplicit.createAndRegisterNewUser(1) { User arg1 ->
-            return arg1
-        }
-
-        controller.userService = userServiceMock.createMock()
-
-        when:
-        request.json = """{
-            "username": "testname",
-            "email": "testing@example.com",
-            "password":"testpw"
-            }"""
-        request.method = "POST"
-        controller.save()
-
-        then:
-        response.status ==  200
-        response.json.username == "testname"
-        response.json.email == "testing@example.com"
-        response.json.password == "testpw"
-
-    }
-
     void "test save user validation fails"() {
         def userServiceMock= mockFor(UserService)
         userServiceMock.demandExplicit.createAndRegisterNewUser(1) { User arg1 ->

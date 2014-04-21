@@ -15,9 +15,9 @@ class User {
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		username blank: false, unique: true
-        email blank: false, unique: false // allow multiple usernames or aliases to share one email address.
-		password blank: false  // TBD: add more password validation.
+		username blank: false, unique: true, minSize: 3
+        email blank: false, unique: false, email: true // allow multiple usernames or aliases to share one email address.
+		password blank: false, minSize: 5  // TBD: add more password validation.
 	}
 
 	static mapping = {
