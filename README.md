@@ -71,6 +71,7 @@ Server Features
 ----------------
 
   * Grails 2.3.7
+  * unit tests are implemented for grails domain objects, controllers, and services.
   * twitter-bootstrap:3.1.1: serves twitter bootstrap resources to single page app.
   * spring-security-rest:1.3.2 : implements authentication token without using http session for stateless REST API.
   * spring-security-core:2.0-RC2: spring security authentication filters for authentication and authorization.
@@ -99,7 +100,10 @@ Client Features and Modules
 TBD, maybe someday
 ------------------
 
-  * implement unit and functional testing across all modules.
+  * integration tests for the grails application.
+  * cucumber functional tests for the full application.
+  * jasmine and other unit tests for the javascript angular application.
+  * update angular-validation tests in my forked copy to pass with changes.
   * improved server validation error handling.
   * deployed demo.
   * localize error messages from server.
