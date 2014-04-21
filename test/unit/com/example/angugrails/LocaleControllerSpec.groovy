@@ -28,11 +28,14 @@ class LocaleControllerSpec extends Specification {
 
         then:
         response.status ==  200
+        // One way to verify the response, compare the full text
         response.text ==  """
                     {
                     "MY_TEST_KEY": "My test translation"
                     }
             """
+        // Another way to verify is via the json attribute of the response
+        response.json.MY_TEST_KEY == "My test translation"
     }
 
 

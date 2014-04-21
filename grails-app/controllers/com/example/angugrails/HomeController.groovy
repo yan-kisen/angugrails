@@ -6,8 +6,5 @@ import grails.plugin.springsecurity.annotation.Secured
 class HomeController {
 
     def index() {
-        log.debug("home controller index.")
-
-
     }
 }

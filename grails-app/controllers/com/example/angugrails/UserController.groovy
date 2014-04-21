@@ -9,8 +9,6 @@ import static org.springframework.http.HttpMethod.*
 @Transactional
 class UserController  {
     static responseFormats = ['json', 'xml']
-
-    def springSecurityService
     def userService
     def passwordEncoder
 
@@ -18,8 +16,8 @@ class UserController  {
     @Secured(['IS_AUTHENTICATED_FULLY'])
     def show(User user) {
         log.debug("In user show controller action.")
-        // respond user
-        respond "forbidden"
+
+        render(status: 403)
     }
 
 
@@ -35,25 +33,17 @@ class UserController  {
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
     def update() {
-        log.debug("In user update controller action.")
-        def currentUser = springSecurityService.getCurrentUser()
-        def isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, request.JSON.password, null)
-        if (isAuthorized) {
-            def savedUser = userService.changePassword(currentUser, request.JSON.password, request.JSON.new_password)
-            log.debug("Changed current user password")
-            if (savedUser.hasErrors()) {
-                respond savedUser.errors
-            } else {
-                respond savedUser
-            }
+        def savedUser = userService.updateCurrentUser(request.JSON.currentPassword, request.JSON.password)
+        if (savedUser.hasErrors()) {
+            respond savedUser.errors
         } else {
-            // fix this to return errors instead.
-            render(status: 403, text: 'Invalid current password.')
+            respond savedUser
         }
     }
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
     def delete() {
-        log.debug("In user delete controller action.")
+        // not implemented yet
+        render(status: 403)
     }
 }

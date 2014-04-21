@@ -10,9 +10,12 @@ class UserService {
     def grailsApplication
     def springSecurityService
 
-
+    /**
+     * this creates a new user record with an active status. No email confirmation is implemented yet.
+     * @param user parsed set of parameters for a new user.
+     * @return created user, or a user with errors enumerated.
+     */
     User createAndRegisterNewUser(User user) {
-
         user.accountLocked = grailsApplication.config.application.registration.emailConfirm
         user.enabled = true
         if (!user.validate()) {
@@ -27,15 +30,23 @@ class UserService {
     }
 
 
-
-    User changePassword(User user, String currentPassword, String newPassword) {
-        /*
-        if (springSecurityService.encodePassword(currentPassword) != user.getPassword()) {
-            log.error("current password is not valid." + currentPassword + "against " + user.getPassword())
-            throw new ValidationException("Current password is not valid.")
+    /**
+     * At the moment, a user can update its password, but can not change any other users.
+     * The user must verify the current password to help prevent somebody else from doing this.
+     */
+    User updateCurrentUser(String currentPassword, String newPassword) {
+        User resp = null
+        def currentUser = springSecurityService.getCurrentUser()
+        def isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, request.JSON.password, null)
+        if (isAuthorized) {
+            resp = changePassword(currentUser, newPassword)
         }
-        */
+        resp
+    }
 
+
+
+    private User changePassword(User user, String currentPassword, String newPassword) {
         user.setPassword(newPassword)
         if (user.hasErrors()) {
             log.error("user has errors after setting password.")
