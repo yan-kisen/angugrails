@@ -1,14 +1,12 @@
 package com.example.angugrails
 
-import grails.validation.ValidationException
 import com.example.angugrails.auth.User
-import com.example.angugrails.auth.Role
-import com.example.angugrails.auth.UserRole
 
 class UserService {
 
     def grailsApplication
     def springSecurityService
+    def passwordEncoder
 
     /**
      * this creates a new user record with an active status. No email confirmation is implemented yet.
@@ -37,7 +35,7 @@ class UserService {
     User updateCurrentUser(String currentPassword, String newPassword) {
         User resp = null
         def currentUser = springSecurityService.getCurrentUser()
-        def isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, request.JSON.password, null)
+        def isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, currentPassword, null)
         if (isAuthorized) {
             resp = changePassword(currentUser, newPassword)
         }
@@ -46,7 +44,7 @@ class UserService {
 
 
 
-    private User changePassword(User user, String currentPassword, String newPassword) {
+    private User changePassword(User user, String newPassword) {
         user.setPassword(newPassword)
         if (user.hasErrors()) {
             log.error("user has errors after setting password.")

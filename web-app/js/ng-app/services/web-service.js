@@ -116,7 +116,7 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
      *
      * @return {Promise} to be resolved or rejected when request is complete or fails.
      */
-    this.changePassword = function (password, newPassword) {
+    this.changePassword = function (currentPassword, newPassword) {
         var resp,
             reason;
         if (!isAuthenticated) {
@@ -126,7 +126,7 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
         } else {
             resp = $http({    method: 'PUT',
                 url: '/angugrails/api/user',
-                data: {password: password, new_password: newPassword },
+                data: {currentPassword: currentPassword, password: newPassword },
                 headers: headers}).
                 then(function (response) {
                     $log.info("password change request successful.");

@@ -36,7 +36,20 @@ class UserSpec extends Specification {
     }
 
 
-    // unique constraints will be tested in integration tests
+    void "Test that the username must be unique across users"() {
+        when: 'two users are created with the same username'
+        def u1 = new User(username: "Common", email: 'test@example.com', password: 'blahblbh').save(flush: true)
+        def u2 = new User(username: "Common", email: 'test1@example.com', password: 'blahblah')
+
+        then: 'the second user validation should fail'
+        !u2.validate()
+
+        when: 'the name of the second user is changed to a unique value'
+        u2.username = 'uncommon'
+
+        then: 'the second user validation should pass'
+        u2.validate()
+    }
 
     void "Test that the email address must not be blank and be formatted as an email address"() {
         when: 'a user is created with a blank email address'

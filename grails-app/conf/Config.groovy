@@ -122,6 +122,7 @@ environments {
 }
 
 
+
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
@@ -180,7 +181,7 @@ log4j = {
     debug "grails.app"
     info "com.odobo"
     info "org.springframework.security"
-    debug  'com.odobo',
+    info  'com.odobo',
             'grails.app.controllers.com.odobo',
            'grails.app.services.com.odobo',
             'org.pac4j',

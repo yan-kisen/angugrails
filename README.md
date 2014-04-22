@@ -1,11 +1,11 @@
 #AnguGrails
 `Version: 0.1 Alpha`
 
-A sample application using Grails 2.3.7 with Spring security 2.0 on the server side to implement a REST API and serves
+A sample application using Grails 2.3.7 with Spring security 2.0, and database migrations on the server side to implement a REST API and serves
 resources for a single page application on the client using AngularJS. This application implements the following
 stories, as separate angular-ui-router states:
 
-  * User registration ( no email confirmation sent )
+  * Register new user ( no email confirmation yet )
   * Login
   * Logout
   * Change Password
@@ -14,11 +14,9 @@ stories, as separate angular-ui-router states:
 All text in the application is localized using the angular-translate library with the url loader for
 translations.
 
-Nothing in this project is original, but is made up from bits and pieces of blogs and sample projects and
-StackOverflow questions and answers that I have found online. This is the result of my research and development
-to put together a single page web application using some of the current state of the art web and development
-technologies as of Spring 2014. Hopefully I have packaged these bits and pieces in such a way that it is useful to
-somebody else.
+This is the result of my research and development to put together a single page web application using some of the current state of the art web and development
+technologies as of Spring 2014. Hopefully I have packaged the bits and pieces of ideas and code examples
+that I've found online into a project that is useful to somebody else.
 
 As I have time, or if I have time, I will implement the TBD section. Any feedback is welcome.
 
@@ -76,10 +74,13 @@ Server Features
   * spring-security-rest:1.3.2 : implements authentication token without using http session for stateless REST API.
   * spring-security-core:2.0-RC2: spring security authentication filters for authentication and authorization.
   * database-migration:1.3.8: grails database migrations for building the user authentication db objects.
-  * serves the css and html web templates for the client application.
-  * the HomeController index action returns the one page angularjs application.
+  * application-resources: all javascript and css files are packaged and served via grails application resource pipelining.
+  * serves the html web templates for the client application.
+  * the HomeController index action returns the one page angularjs application outline.
   * once the browser app starts, it makes rest calls to the api actions.
   * serves the locale file for the language localization vi the LocaleController.
+  * there are no application objects defined other than the minimally required authentication domain objects.
+  * home page requires authentication and displays one message from template.
 
 
 Client Features and Modules
@@ -106,7 +107,7 @@ TBD, maybe someday
   * update angular-validation tests in my forked copy to pass with changes.
   * improved server validation error handling.
   * deployed demo.
-  * localize error messages from server.
+  * localize error codes from server.
   * cross browser and mobile test.
   * email confirmation of new registrations.
   * reset auth token when changing password to force relogin.
