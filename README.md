@@ -10,6 +10,8 @@ stories, as separate angular-ui-router states:
   * Logout
   * Change Password
   * View home page
+  * Functional test with Cucumber
+  * Grails unit test with spock
 
 All text in the application is localized using the angular-translate library with the url loader for
 translations.
@@ -74,6 +76,7 @@ Server Features
   * spring-security-rest:1.3.2 : implements authentication token without using http session for stateless REST API.
   * spring-security-core:2.0-RC2: spring security authentication filters for authentication and authorization.
   * database-migration:1.3.8: grails database migrations for building the user authentication db objects.
+  * geb-0.9.2, selenium, cucumber:0.10.0
   * application-resources: all javascript and css files are packaged and served via grails application resource pipelining.
   * serves the html web templates for the client application.
   * the HomeController index action returns the one page angularjs application outline.
@@ -102,7 +105,7 @@ TBD, maybe someday
 ------------------
 
   * integration tests for the grails application.
-  * cucumber functional tests for the full application.
+  * complete the rest of the cucumber functional tests for the full application.
   * jasmine and other unit tests for the javascript angular application.
   * update angular-validation tests in my forked copy to pass with changes.
   * improved server validation error handling.
