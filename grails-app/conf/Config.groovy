@@ -178,7 +178,7 @@ log4j = {
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
             'org.codehaus.groovy.grails.web.pages' //  GSP
     warn   'org.apache.catalina'
-    debug "grails.app"
+    info "grails.app"
     info "com.odobo"
     info "org.springframework.security"
     info  'com.odobo',

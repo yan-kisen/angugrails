@@ -8,9 +8,9 @@ class User {
 	String password
     String email
 	boolean enabled = true
-	boolean accountExpired
-	boolean accountLocked
-	boolean passwordExpired
+	boolean accountExpired = false
+	boolean accountLocked = true // force app to explicitly unlock new accounts.
+	boolean passwordExpired = false
 
 	static transients = ['springSecurityService']
 

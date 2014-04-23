@@ -1,12 +1,12 @@
 <div class="col-xs-2 center-block">
     <h2>{{ 'LOGOUT_TITLE' | translate }}</h2>
 
-    <form name="logoutForm" ng-submit="logout()" novalidate>
-        <div class="" form-group>
+    <form name="logoutForm" id="logout-form" ng-submit="logout()" novalidate>
+        <div class="form-group">
             {{ 'LOGOUT_INSTRUCTION' | translate }}
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">{{ 'LOGOUT_BUTTON' | translate }}</button>
+            <button type="submit" id="submit" class="btn btn-primary">{{ 'LOGOUT_BUTTON' | translate }}</button>
         </div>
     </form>
 </div>

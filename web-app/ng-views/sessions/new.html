@@ -3,11 +3,11 @@
         <h2 class="col-md-7 col-md-offset-1">{{ 'LOGIN_TITLE' | translate }}</h2>
     </div>
     <div class="row">
-        <div class="alert alert-danger col-md-6 col-md-offset-1" ng-show="errorMessage">
+        <div class="alert alert-danger col-md-6 col-md-offset-1" id="error-message" ng-show="errorMessage">
             {{ errorMessage }}
         </div>
     </div>
-    <form role="form" name="loginForm" id="loginForm" class="form-horizontal" ng-submit="login()" novalidate>
+    <form role="form" name="loginForm" id="login-form" class="form-horizontal" ng-submit="login()" novalidate>
         <div class="form-group">
             <label for="username" class="col-md-3 control-label">{{ 'USERNAME_LABEL' | translate }}</label>
 
