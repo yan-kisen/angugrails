@@ -18,6 +18,7 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
 
                 // get the validation attribute
                 var validationAttr = attrs.validation;
+                var fieldId = attrs.id;
 
                 // define the variables we'll use
                 var messages = [];
@@ -38,7 +39,20 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                 };
 
                 var sameValidator = function(element, value) {
-                    return value === element.val();
+                    var resp = false;
+                    var elementValue = element.val();
+                    if (!value) {
+                        if (!elementValue) {
+                            resp = true;
+                        } else {
+                            resp = false;
+                        }
+                    } else if (!elementValue) {
+                        resp = true;
+                    } else if (value === elementValue) {
+                        resp = true;
+                    }
+                    return resp;
                 };
 
                 // by default we'll consider field not required if not required then no need to validate empty value..right
@@ -300,7 +314,10 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                     } // end for loop
 
                     // -- Error Display --//
-                    updateErrorMsg(isFieldValid, message);
+                    /* updateErrorMsg(isFieldValid, message);     */
+
+                    var field = attrs.id;
+                    scope.errors[field] = message;
 
 
                     return isFieldValid;
@@ -315,11 +332,17 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                  * @param string message: error message to display
                  */
                 var updateErrorMsg = function(isFieldValid, message) {
+                    /* original code that updates a view element with the error message
                     var errorElm = (typeof attrs.validationErrorTo !== "undefined")
                         ? angular.element(document.querySelector('#'+attrs.validationErrorTo))
                         : elm.next();
+                        */
+                    /* my updated code that updates a controller error attribute based on errormessage attribute */
+
+
 
                     // Re-Render Error display element inside the <span> or <div>
+                    /*
                     if(typeof errorElm !== "undefined") {
                         if(!isFieldValid && ctrl.$dirty) {
                             // Not valid & dirty, display the message
@@ -329,6 +352,7 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                             errorElm.text("");
                         }
                     }
+                    */
                 }
 
                 /** Validator function to attach to the element, this will get call whenever the input field is updated

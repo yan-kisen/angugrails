@@ -10,6 +10,7 @@ import static org.springframework.http.HttpMethod.*
 class UserController  {
     static responseFormats = ['json', 'xml']
     def userService
+    def springSecurityService
     def passwordEncoder
 
 
@@ -19,6 +20,7 @@ class UserController  {
 
         render(status: 403)
     }
+
 
 
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
@@ -31,13 +33,26 @@ class UserController  {
         }
     }
 
+    /**
+     * Only the current user can be updated at the moment.
+     * @return
+     */
     @Secured(['IS_AUTHENTICATED_FULLY'])
     def update() {
-        def savedUser = userService.updateCurrentUser(request.JSON.currentPassword, request.JSON.password)
-        if (savedUser.hasErrors()) {
-            respond savedUser.errors
+        String currentPassword = request.JSON.currentPassword
+        String newPassword = request.JSON.password
+        User currentUser = springSecurityService.getCurrentUser()
+        Boolean isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, currentPassword, null)
+
+        if (isAuthorized) {
+            currentUser.password = newPassword
+            if (currentUser.validate() && currentUser.save()) {
+                respond currentUser
+            } else {
+                respond currentUser.errors
+            }
         } else {
-            respond savedUser
+            render(status: 403)
         }
     }
 

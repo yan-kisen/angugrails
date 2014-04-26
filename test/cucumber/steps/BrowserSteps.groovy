@@ -49,12 +49,19 @@ When(~'^user enters "([^"]*)" for "([^"]*)"$') { String value, String id ->
 }
 
 /**
+ * Then "[element-id]" should be disabled
+ */
+Then(~'"([^"]*)" should be disabled$') { String id ->
+        $('#' + id) && $('#' + id).disabled
+}
+
+/**
  * Then user waits for "[element-id]" to appear.
  *
  * Wait for an element to appear, maybe in response to a server request.
  *
  */
-Then(~'user waits for "([^"]*)" to appear$') { String id ->
+Then(~'"([^"]*)" should appear$') { String id ->
     waitFor {
         $('#' + id) && $('#' + id).displayed
     }

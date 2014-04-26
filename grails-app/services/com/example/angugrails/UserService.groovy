@@ -28,31 +28,6 @@ class UserService {
     }
 
 
-    /**
-     * At the moment, a user can update its password, but can not change any other users.
-     * The user must verify the current password to help prevent somebody else from doing this.
-     */
-    User updateCurrentUser(String currentPassword, String newPassword) {
-        User resp = null
-        def currentUser = springSecurityService.getCurrentUser()
-        def isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, currentPassword, null)
-        if (isAuthorized) {
-            resp = changePassword(currentUser, newPassword)
-        }
-        resp
-    }
-
-
-
-    private User changePassword(User user, String newPassword) {
-        user.setPassword(newPassword)
-        if (user.hasErrors()) {
-            log.error("user has errors after setting password.")
-        } else {
-            user.save(flush: true)
-        }
-        return user
-    }
 
 
 }

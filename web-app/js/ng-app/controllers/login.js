@@ -3,8 +3,10 @@ angular.module('angugrails.controllers').
     controller('LoginCtrl',function LoginController($scope, $state, $log, WebService) {
 
         $scope.reset = function () {
-            $scope.credentials = {username: '', password: '' };
+            $scope.username = '';
+            $scope.password = '' ;
             $scope.errorMessage = '';
+            $scope.errors = {};
             $scope.isAuthenticated = WebService.isAuthenticated;
             $scope.submitted = false;
         };
@@ -24,7 +26,7 @@ angular.module('angugrails.controllers').
             $scope.errorMessage = '';
             $scope.submitted = true;
             if ($scope.loginForm.$valid) {
-                return WebService.login($scope.credentials.username, $scope.credentials.password).
+                return WebService.login($scope.username, $scope.password).
                     then(function (param) {
                         $state.go('home');
                     }, function (response) {

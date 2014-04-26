@@ -5,8 +5,9 @@ angular.module('angugrails.controllers').
         $scope.reset = function () {
             $scope.password = null;
             $scope.newPassword = null;
-            $scope.confirmPassword = null;
+            $scope.confirmNewPassword = null;
             $scope.errorMessage = "";
+            $scope.errors = {};
             $scope.submitted = false;
             $scope.authUsername = WebService.getAuthUsername();
         };
@@ -17,15 +18,17 @@ angular.module('angugrails.controllers').
             $('input').checkAndTriggerAutoFillEvent();
             $scope.errorMessage = "";
             $scope.submitted = true;
-            if ($scope.newPassword != $scope.confirmPassword) {
-
-            }
             if ($scope.passwordForm.$valid) {
+                $scope.errorMessage = "";
+                $scope.errors['password'] = "";
                 return WebService.changePassword($scope.password, $scope.newPassword).
                     then(function () {
                         $state.go('home');
                     }, function (response) {
                         $scope.errorMessage = response.description;
+                        if (response.httpStatus === 403) {
+                            $scope.errors['password'] = "Invalid Password.";
+                        }
                     });
             } else {
                 $scope.errorMessage = "Please correct errors below.";

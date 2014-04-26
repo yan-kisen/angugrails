@@ -13,23 +13,29 @@ angular.module('angugrails.services').service('WebServiceUtil', function ($http,
      */
     this.handleHttpError = function (response) {
         var description;
-        var httpError = response.status;
+        var httpStatus = response.status;
+        var errors = response.data.errors;
 
-        if (response.status == 422) {
-            description = "Please correct errors.";
-        } else if (response.status == 400) {
+        if (httpStatus == 422) {
+            description = "One or more parameters are invalid.";
+
+            for (var i =0; i < errors.length; i++) {
+                var debug = errors[i];
+                true;
+            }
+        } else if (httpStatus == 400) {
             description = "Unexpected application error.";
-        } else if (response.status == 404) {
+        } else if (httpStatus == 404) {
             description = "Url not found. Unexpected application error.";
-        } else if (response.status == 500) {
+        } else if (httpStatus == 500) {
             description = "Unexpected server error.";
-        } else if (response.status == 403) {
+        } else if (httpStatus == 403) {
             description = "Access denied for given username and password.";
         } else {
             description = "Unexpected server request error."
         }
-        $log.error("Http status response: " + httpError);
-        return { httpError: httpError, description: description, errors: response.data.errors };
+        $log.error("Http status response: " + httpStatus);
+        return { httpStatus: httpStatus, description: description, errors: response.data.errors };
     };
 
 });

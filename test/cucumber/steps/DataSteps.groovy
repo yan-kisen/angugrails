@@ -7,12 +7,20 @@ import geb.*
 import static cucumber.api.groovy.EN.*
 
 
+Given(~'^the db is reset') { ->
+    User.findAll().each {
+        println("debug: delete user " + it.username + ".")
+        it.delete(flush: true)
+    }
+}
+
+
 /**
  * When user goes to "[relative url]".
  *
  * Open the url at http://localhost:8080/angugrails/[relative url]
  */
-When(~'^test loads new user with username: "([^"]*)" email: "([^"]*)" password: "([^"]*)"$') {
+When(~'^the db is loaded with new user. username: "([^"]*)" email: "([^"]*)" password: "([^"]*)"$') {
     String username, String email, String password ->
         def user = new User(username: username, email: email, password: password, enabled: true, accountLocked: false)
         if (!user.validate()) {

@@ -3,9 +3,14 @@ angular.module('angugrails.controllers').
     controller('RegisterCtrl',function RegisterController($scope, $state, $log, WebService) {
 
         $scope.reset = function () {
-            $scope.registration = {username: null, email: null, password: null, passwordConfirm: null};
+            $scope.username = null;
+            $scope.email = null;
+            $scope.password = null;
+            $scope.passwordConfirm = null;
             $scope.errorMessage = "";
+            $scope.errors = {};
             $scope.submitted = false;
+
         };
 
         $scope.reset();
@@ -15,9 +20,9 @@ angular.module('angugrails.controllers').
             $scope.errorMessage = "";
             $scope.submitted = true;
             if ($scope.registerForm.$valid) {
-                return WebService.register($scope.registration.username,
-                        $scope.registration.email,
-                        $scope.registration.password).
+                return WebService.register($scope.username,
+                        $scope.email,
+                        $scope.password).
                     then(function () {
                         $state.go('home');
                     }, function (response) {

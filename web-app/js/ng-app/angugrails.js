@@ -1,7 +1,7 @@
 // Declare app level module which depends on filters, and services
 angular.module('angugrails.resources', ['ngResource']);
 angular.module('angugrails.services', ['ngResource']);
-angular.module('angugrails.directives', []);
+angular.module('angugrails.directives', ['pascalprecht.translate']);
 angular.module('angugrails.filters', []);
 angular.module('angugrails.controllers', ['ngCookies', 'ui.router']);
 angular.module('angugrails.i18n', ['pascalprecht.translate']);
