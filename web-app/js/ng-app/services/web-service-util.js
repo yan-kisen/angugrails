@@ -18,11 +18,6 @@ angular.module('angugrails.services').service('WebServiceUtil', function ($http,
 
         if (httpStatus == 422) {
             description = "One or more parameters are invalid.";
-
-            for (var i =0; i < errors.length; i++) {
-                var debug = errors[i];
-                true;
-            }
         } else if (httpStatus == 400) {
             description = "Unexpected application error.";
         } else if (httpStatus == 404) {

@@ -57,11 +57,6 @@
     <changeSet author="ryangrow (generated)" id="1394569922102-4">
         <addPrimaryKey columnNames="role_id, user_id" constraintName="user" tableName="user_role"/>
     </changeSet>
-    <changeSet author="ryangrow (generated)" id="1394569922102-7">
-        <createIndex indexName="email_uniq_1394569922044" tableName="user" unique="true">
-            <column name="email"/>
-        </createIndex>
-    </changeSet>
     <changeSet author="ryangrow (generated)" id="1394569922102-8">
         <createIndex indexName="username_uniq_1394569922049" tableName="user" unique="true">
             <column name="username"/>

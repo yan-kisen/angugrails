@@ -31,6 +31,10 @@ angular.module('angugrails.controllers').
                         $state.go('home');
                     }, function (response) {
                         $scope.errorMessage = response.description;
+                        for (var i =0; i < response.errors.length; i++) {
+                            var debug = response.errors[i];
+                            true;
+                        }
                     });
             } else {
                 $scope.errorMessage = "Please correct errors below.";

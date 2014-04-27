@@ -317,6 +317,8 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                     /* updateErrorMsg(isFieldValid, message);     */
 
                     var field = attrs.id;
+
+                    /* an empty message from client validation should erase any previous server error for this field */
                     scope.errors[field] = message;
 
 
