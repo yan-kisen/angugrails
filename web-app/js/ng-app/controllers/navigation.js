@@ -6,6 +6,8 @@ angular.module('angugrails.controllers').
             $scope.isAuthenticated = WebService.isAuthenticated;
             $scope.authUsername = WebService.authUsername;
             $scope.roles = WebService.roles;
+            // always clear flash message status code on page load.
+            $scope.statusCode = "";
         };
 
         $scope.reset();
@@ -28,4 +30,5 @@ angular.module('angugrails.controllers').
             $log.debug("in navigation watch, isAuthenticated is: " + isAuthenticated + ".");
             $scope.isAuthenticated = WebService.getIsAuthenticated();
         });
+
     });

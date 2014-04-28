@@ -1,7 +1,7 @@
 #AnguGrails
 `Version: 0.1 Alpha`
 
-A sample application using Grails 2.3.7 with Spring security 2.0, and database migrations on the server side to implement a REST API and serves
+A sample application using Grails 2.3.8 with Spring security 2.0, and database migrations on the server side to implement a REST API and serves
 resources for a single page application on the client using AngularJS. This application implements the following
 stories, as separate angular-ui-router states:
 
@@ -10,15 +10,19 @@ stories, as separate angular-ui-router states:
   * Logout
   * Change Password
   * View home page
-  * Functional test with Cucumber
+  * Functional test with Cucumber ( not working at the moment when all run at once )
   * Grails unit test with spock
 
 All text in the application is localized using the angular-translate library with the url loader for
-translations.
+translations. ( except validation errors from the server at the moment )
 
 This is the result of my research and development to put together a single page web application using some of the current state of the art web and development
 technologies as of Spring 2014. Hopefully I have packaged the bits and pieces of ideas and code examples
 that I've found online into a project that is useful to somebody else.
+
+
+There are no guarantees that this program will work for you, especially make sure you are confident in the authentication and authorization 
+before using this for anything important!
 
 As I have time, or if I have time, I will implement the TBD section. Any feedback is welcome.
 
@@ -26,7 +30,7 @@ As I have time, or if I have time, I will implement the TBD section. Any feedbac
 Try it out
 -----------
 
-  * Make sure you have grails 2.3.7 installed and working locally.
+  * Make sure you have grails 2.3.8 installed and working locally.
   * Clone this github project to your local environment.
   * The default configuration uses an in memory h2 database that is recreated each time you run the server,
     thus losing any new users you created. If you use this for any real development, you will want to edit
@@ -70,7 +74,7 @@ grails dbm-update
 Server Features
 ----------------
 
-  * Grails 2.3.7
+  * Grails 2.3.8
   * unit tests are implemented for grails domain objects, controllers, and services.
   * twitter-bootstrap:3.1.1: serves twitter bootstrap resources to single page app.
   * spring-security-rest:1.3.2 : implements authentication token without using http session for stateless REST API.
@@ -94,8 +98,8 @@ Client Features and Modules
   * angular-ui-router v0.2.8: plugin for managing states of the client ui.
   * angular-translate v1.1.1: I18N and localization of AngularJS app.
   * angular-translate-loader-url: v2.1.0: client app pulls down json translation resources from LocaleController.
-  * angular-validation: v1.0 beta: I have hacked in password confirmation, and limiting one error message in order,
-                                   also added translate on message parameter keys.
+  * angular-validation: v1.0 beta: I made a few major changes to this plugin, mainly to support a common validation mechanism
+                        for server error validation and client field validation which now works.
   * state management: uses two views and controllers per state, where one view and controller is for nav bar,
                       and the other view and controller represent the workspace beneath the navbar.
   * single page app implements sign up new user, login, logout, change password,
@@ -107,8 +111,7 @@ TBD, maybe someday
   * integration tests for the grails application.
   * complete the rest of the cucumber functional tests for the full application.
   * jasmine and other unit tests for the javascript angular application.
-  * update angular-validation tests in my forked copy to pass with changes.
-  * improved server validation error handling.
+  * write a new angular-validation plugin that incorporates server and client validation handling like this does. 
   * deployed demo.
   * localize error codes from server.
   * cross browser and mobile test.

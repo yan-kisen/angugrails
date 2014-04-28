@@ -10,11 +10,8 @@
             <div class="col-sm-12 col-md-12">
 
                 <div ui-view="navigation"></div>
-
+                <div ui-view="flash"></div>
                 <div ui-view="content"></div>
-
-
-
             </div>
         </div>
     </body>

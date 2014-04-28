@@ -6,7 +6,6 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
     var headers = { };
 
     var isAuthenticated = false;
-    var authMessage = undefined;
     var authRoles = undefined;
     var authUsername = undefined;
     // TBD: set authUserID correctly.
@@ -18,7 +17,7 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
      */
     this.getIsAuthenticated = function () {
         return isAuthenticated;
-    }
+    };
 
     /**
      * Determine whether or not user is authorized to access given UI state.
@@ -28,7 +27,7 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
      */
     this.isAuthorized = function (state) {
         return  (state.noAuthRequired || isAuthenticated)
-    }
+    };
 
     /**
      * Returns name of current logged in user.
@@ -36,16 +35,8 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
      */
     this.getAuthUsername = function () {
         return authUsername;
-    }
+    };
 
-
-    /**
-     * Returns message describing current authentication status.
-     * @returns {undefined}
-     */
-    this.getAuthMessage = function () {
-        return authMessage;
-    }
 
 
     /**
@@ -54,18 +45,16 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
      */
     this.getAuthRoles = function () {
         return authRoles;
-    }
+    };
 
     /**
      * Clear all authentication tokens and role information.
      * @private
      */
     this._clearAuth = function () {
-        $log.debug("in clearAuth()");
         headers['X-Auth-Token'] = undefined;
 
         isAuthenticated = false;
-        authMessage = undefined;
         authRoles = undefined;
         authUsername = undefined;
         authUserId = undefined;
@@ -98,7 +87,6 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
                 headers: headers}).
                 then(function (response) {
                     $log.info("http registration request success.");
-                    // TBD: handle resetting of the session token on the server.
                 },
                 function (response) {
                     return $q.reject(WebServiceUtil.handleHttpError(response));
@@ -111,8 +99,8 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
     /**
      * Change the password of the current logged in user.
      *
-     * @param {String} current user password to authorize
-     * @param {String} new password.
+     * @param {String} currentPassword
+     * @param {String} newPassword
      *
      * @return {Promise} to be resolved or rejected when request is complete or fails.
      */
@@ -191,12 +179,10 @@ angular.module('angugrails.services').service('WebService', function ($http, $co
                 headers: headers}).
                 then(function (response) {
                     $log.info("logout successful")
-                    return("You have been logged out.");
                 },
                 function (response) {
                     reason = WebServiceUtil.handleHttpError(response);
                     // ignore errors on logout
-                    return "You have been logged out.";
                 });
             this._clearAuth();
         }

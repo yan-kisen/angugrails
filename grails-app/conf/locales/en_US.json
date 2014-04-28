@@ -14,20 +14,25 @@
     "USERNAME_LABEL": "Username",
     "PASSWORD_LABEL": "Password",
 
+    "STATUS_LOGGED_IN": "You are now signed in.",
+
     "LOGOUT_TITLE": "Sign Out",
     "LOGOUT_BUTTON": "Sign Out",
     "LOGOUT_INSTRUCTION": "Please confirm that you want to sign out.",
+    "STATUS_LOGGED_OUT": "You have signed out.",
 
     "REGISTER_TITLE": "Sign Up for AnguGrails",
     "REGISTER_BUTTON": "Sign Up",
     "EMAIL_LABEL": "Email Address",
     "CONFIRM_PASSWORD_LABEL": "Confirm Password",
+    "STATUS_REGISTERED": "The account is now registered.",
 
-    "CHANGE_PASSWORD_TITLE": "Change your AnguGrails Password",
+    "CHANGE_PASSWORD_TITLE": "Change your AnguGrails Profile",
     "CHANGE_PASSWORD_BUTTON": "Save",
     "CURRENT_PASSWORD_LABEL": "Current Password",
     "NEW_PASSWORD_LABEL": "New Password",
     "CONFIRM_NEW_PASSWORD_LABEL": "Confirm New Password",
+    "STATUS_PASSWORD_CHANGED": "Your profile has been changed",
 
 
     "INVALID_ALPHA":            "May only contain letters. ",
