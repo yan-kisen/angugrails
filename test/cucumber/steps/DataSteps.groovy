@@ -9,7 +9,6 @@ import static cucumber.api.groovy.EN.*
 
 Given(~'^the db is reset') { ->
     User.findAll().each {
-        println("debug: delete user " + it.username + ".")
         it.delete(flush: true)
     }
 }
@@ -27,7 +26,5 @@ When(~'^the db is loaded with new user. username: "([^"]*)" email: "([^"]*)" pas
             throw new Exception("unexpected error.")
         } else {
             user.save(flush: true)
-            def debug = User.findByUsername("user1")
-            debug.username
         }
 }

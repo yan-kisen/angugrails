@@ -1,4 +1,4 @@
-
+@current
 Feature: User Profile
   Background:
     Given the db is reset
@@ -18,8 +18,8 @@ Feature: User Profile
     Then "profile-form" should appear
 
     When user enters "testpassword1" for "password"
-    When user enters "beepbeep" for "new-password"
-    When user enters "beepbeep" for "confirm-new-password"
+    When user enters "beepbeep" for "newPassword"
+    When user enters "beepbeep" for "confirmNewPassword"
     When user clicks "submit"
     Then "home-content" should appear
 
@@ -31,8 +31,8 @@ Feature: User Profile
 
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
-    When user clicks "submit"
-    Then "error-message" should appear
+    Then "submit" should be disabled
+
 
     When user enters "beepbeep" for "password"
     When user clicks "submit"
@@ -46,7 +46,6 @@ Feature: User Profile
 
 
 
-  @current
   Scenario: User attempts to change password, enters invalid current password.
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
@@ -103,8 +102,8 @@ Feature: User Profile
     Then "profile-form" should appear
 
     When user enters "" for "password"
-    When user enters "beepbeep" for "new-password"
-    When user enters "beepbeep1" for "confirm-new-password"
+    When user enters "beepbeep" for "newPassword"
+    When user enters "beepbeep1" for "confirmNewPassword"
     Then "submit" should be disabled
 
     When user clicks "nav-logout"
@@ -125,10 +124,10 @@ Feature: User Profile
     Then "profile-form" should appear
 
     When user enters "" for "password"
-    When user enters "b" for "new-password"
-    When user enters "b" for "confirm-new-password"
-    When user clicks "submit"
-    Then "error-message" should appear
+    When user enters "b" for "newPassword"
+    When user enters "b" for "confirmNewPassword"
+    Then "submit" should be disabled
+
 
     When user clicks "nav-logout"
     Then "logout-form" should appear
