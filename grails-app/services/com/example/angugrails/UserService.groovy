@@ -1,7 +1,9 @@
 package com.example.angugrails
 
 import com.example.angugrails.auth.User
+import grails.transaction.Transactional
 
+@Transactional
 class UserService {
 
     def grailsApplication
@@ -27,7 +29,19 @@ class UserService {
         return user
     }
 
+    User updateCurrentUserPassword(currentPassword, newPassword) {
+        User currentUser = springSecurityService.getCurrentUser()
+        Boolean isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, currentPassword, null)
 
-
+        if (isAuthorized) {
+            currentUser.password = newPassword
+            if (currentUser.validate()) {
+                currentUser.save()
+            }
+        } else {
+            throw new Exception("Not authorized")
+        }
+        return currentUser
+    }
 
 }

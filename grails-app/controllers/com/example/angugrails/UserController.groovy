@@ -6,7 +6,7 @@ import grails.transaction.*
 import static org.springframework.http.HttpStatus.*
 import static org.springframework.http.HttpMethod.*
 
-@Transactional
+
 class UserController  {
     static responseFormats = ['json', 'xml']
     def userService
@@ -39,21 +39,17 @@ class UserController  {
      */
     @Secured(['IS_AUTHENTICATED_FULLY'])
     def update() {
-        String currentPassword = request.JSON.currentPassword
-        String newPassword = request.JSON.password
-        User currentUser = springSecurityService.getCurrentUser()
-        Boolean isAuthorized = passwordEncoder.isPasswordValid(currentUser.password, currentPassword, null)
-
-        if (isAuthorized) {
-            currentUser.password = newPassword
-            if (currentUser.validate() && currentUser.save()) {
-                respond currentUser
-            } else {
-                respond currentUser.errors
-            }
-        } else {
+        try {
+          User user = userService.updateCurrentUserPassword(request.JSON.currentPassword, request.JSON.password)
+          if (user.hasErrors()) {
+            respond user.errors
+          } else {
+              respond user
+          }
+        } catch (Exception ex) {
             render(status: 403)
         }
+
     }
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
