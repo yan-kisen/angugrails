@@ -1,5 +1,5 @@
 cucumber {
     tags = ["~@ignore"]
     features = ["test/cucumber/features"]
-    glue = ["test/cucumber/steps"]
+    glue = ["test/functional/steps"]
 }

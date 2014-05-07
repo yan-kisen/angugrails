@@ -33,7 +33,7 @@ grails.project.dependency.resolution = {
         // for spring security plugin.
         mavenRepo "http://repo.spring.io/milestone/"
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
-        //mavenRepo "http://repository.codehaus.org"
+        mavenRepo "http://repository.codehaus.org"
         mavenRepo "http://download.java.net/maven/2/"
         mavenRepo 'https://oss.sonatype.org/content/repositories/snapshots'
     }
@@ -47,6 +47,8 @@ grails.project.dependency.resolution = {
 
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
         test "org.gebish:geb-junit4:$gebVersion"
+        compile "org.codehaus.groovy.modules.remote:remote-transport-http:0.5"
+        test("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1")
         compile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
         compile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
     }
@@ -67,6 +69,7 @@ grails.project.dependency.resolution = {
 
         compile ':spring-security-core:2.0-RC2'
 
+        compile ":remote-control:1.4"
         compile ":cucumber:0.10.0"
         test ":geb:$gebVersion"
 
