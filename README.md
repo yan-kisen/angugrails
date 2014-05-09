@@ -10,11 +10,12 @@ stories, as separate angular-ui-router states:
   * Logout
   * Change Password
   * View home page
+  * Form validation on both client side and server side.
   * Functional test with Cucumber and remote-control, this is now working!
   * Grails unit test with spock
 
 All text in the application is localized using the angular-translate library with the url loader for
-translations. ( except validation errors from the server at the moment )
+translations. 
 
 This is the result of my research and development to put together a single page web application using some of the current
 state of the art web and development technologies as of Spring 2014. Hopefully I have packaged the bits and pieces of
