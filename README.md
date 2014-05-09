@@ -1,8 +1,8 @@
 #AnguGrails
-`Version: 0.1 Alpha`
+`Version: 0.5 Alpha`
 
-A sample application using Grails 2.3.8 with Spring security 2.0, and database migrations on the server side to implement a REST API and serves
-resources for a single page application on the client using AngularJS. This application implements the following
+A sample application using Grails 2.3.8 with Spring security 2.0, and optional database migrations on the server side to implement a REST API
+that serves resources for a single page application on the client using AngularJS. This application implements the following
 stories, as separate angular-ui-router states:
 
   * Register new user ( no email confirmation yet )
@@ -10,15 +10,15 @@ stories, as separate angular-ui-router states:
   * Logout
   * Change Password
   * View home page
-  * Functional test with Cucumber ( not working at the moment when all run at once )
+  * Functional test with Cucumber and remote-control, this is now working!
   * Grails unit test with spock
 
 All text in the application is localized using the angular-translate library with the url loader for
 translations. ( except validation errors from the server at the moment )
 
-This is the result of my research and development to put together a single page web application using some of the current state of the art web and development
-technologies as of Spring 2014. Hopefully I have packaged the bits and pieces of ideas and code examples
-that I've found online into a project that is useful to somebody else.
+This is the result of my research and development to put together a single page web application using some of the current
+state of the art web and development technologies as of Spring 2014. Hopefully I have packaged the bits and pieces of
+ideas and code examples that I've found online into a project that is useful to somebody else.
 
 
 There are no guarantees that this program will work for you, especially make sure you are confident in the authentication and authorization 
@@ -113,7 +113,6 @@ TBD, maybe someday
   * jasmine and other unit tests for the javascript angular application.
   * write a new angular-validation plugin that incorporates server and client validation handling like this does. 
   * deployed demo.
-  * localize error codes from server.
   * cross browser and mobile test.
   * email confirmation of new registrations.
   * reset auth token when changing password to force relogin.

@@ -170,6 +170,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/home/**':                       ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/ng-views/**':                   ['IS_AUTHENTICATED_ANONYMOUSLY'],
 
+    // TBD: do not allow anything to access this url outside of test!
     '/grails-remote-control':         ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
 
