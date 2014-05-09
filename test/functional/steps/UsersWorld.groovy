@@ -1,9 +1,9 @@
-package world
+package steps
 import data.Data
 import grails.plugin.remotecontrol.RemoteControl
 
 
-class Users {
+class UsersWorld {
 
     Long setupUser (String username) {
         def remote = new RemoteControl ()

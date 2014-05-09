@@ -168,7 +168,9 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/api/login':                     ['permitAll'],
     '/api/logout':                    ['IS_AUTHENTICATED'],
     '/home/**':                       ['IS_AUTHENTICATED_ANONYMOUSLY'],
-    '/ng-views/**':                   ['IS_AUTHENTICATED_ANONYMOUSLY']
+    '/ng-views/**':                   ['IS_AUTHENTICATED_ANONYMOUSLY'],
+
+    '/grails-remote-control':         ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
 
 grails.views.gsp.encoding="UTF-8"

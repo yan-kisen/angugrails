@@ -1,4 +1,4 @@
-package world
+package steps
 
 import grails.plugin.remotecontrol.RemoteControl
 import static cucumber.api.groovy.Hooks.World
@@ -24,6 +24,6 @@ class AngugrailsWorld {
 
 World () {
     def world = new AngugrailsWorld (binding)
-    world.metaClass.mixin Users
+    world.metaClass.mixin UsersWorld
     world
 }
