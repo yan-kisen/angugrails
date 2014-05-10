@@ -9,7 +9,7 @@ import grails.test.mixin.TestFor
 import spock.lang.Specification
 
 @TestFor(UserRole)
-@Mock([User, Role])
+@Mock([User, Role, UserRole])
 class UserRoleSpec extends Specification {
 
 

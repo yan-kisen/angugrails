@@ -28,6 +28,7 @@ modules = {
         resource url: 'js/ng-app/services/web-service-util.js', nominify:true
         resource url: 'js/ng-app/services/web-service.js', nominify:true
         resource url: 'js/ng-app/services/flash-service.js', nominify:true
+        resource url: 'js/ng-app/services/run-service.js', nominify:true
     }
 
     'angular-controllers' {

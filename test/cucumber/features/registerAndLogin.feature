@@ -45,7 +45,7 @@ Feature: Register and Log In
     When user enters "invalid" for "username"
     When user enters "invalid" for "password"
     When user clicks "submit"
-    Then "errorMessage" should appear as "Access denied for given username and password."
+    Then "errorMessage" text should appear as "Access denied for given username and password."
 
   Scenario: An existing user logs in with valid credentials
 

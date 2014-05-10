@@ -85,7 +85,7 @@ Then(~'^break debug$')  { ->
  * Wait for an element to appear, and compare the displayed text
  *
  */
-Then(~'^"([^"]*)" should appear as "([^"]*)"$') { String id, String text->
+Then(~'^"([^"]*)" text should appear as "([^"]*)"$') { String id, String text->
     waitFor {
         $('#' + id) && $('#' + id).displayed
     }
@@ -95,7 +95,7 @@ Then(~'^"([^"]*)" should appear as "([^"]*)"$') { String id, String text->
 /**
  * Then "[element-id]" text should be "[text string]".
  *
- * This will remove all whitespace from both strings before comparing them.
+ * Immediately compare the element's displayed text with validation text.
  */
 Then(~'^"([^"]*)" text should be "([^"]*)"$') { String id, String text ->
     compareText(id, text)

@@ -52,7 +52,7 @@ class UserControllerSpec extends Specification {
 
     void "test update password happy path"() {
         def userServiceMock= mockFor(UserService)
-        userServiceMock.demandExplicit.updateCurrentUser(1) { String currentPassword, String newPassword ->
+        userServiceMock.demandExplicit.updateCurrentUserPassword(1) { String currentPassword, String newPassword ->
             def currentUser = new User(username: "test", email: "test@example.com", password: "encrypted")
             assert currentPassword == "blah"
             assert newPassword == "peep"

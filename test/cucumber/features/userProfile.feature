@@ -31,7 +31,7 @@ Feature: User Profile
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
     When user clicks "submit"
-    Then "errorMessage" should appear as "Access denied for given username and password."
+    Then "errorMessage" text should appear as "Access denied for given username and password."
 
 
     When user enters "beepbeep" for "password"
@@ -59,7 +59,8 @@ Feature: User Profile
     When user enters "badpassword" for "password"
     When user enters "beepbeep" for "new-password"
     When user enters "beepbeep" for "confirm-new-password"
-    Then "submit" should be disabled
+    When user clicks "submit"
+    Then "error-message" text should appear as "Access denied for given username and password."
 
     When user clicks "nav-logout"
     Then "logout-form" should appear
@@ -123,6 +124,7 @@ Feature: User Profile
     When user clicks "nav-profile"
     Then "profile-form" should appear
 
+    When user clicks on "password"
     When user enters "" for "password"
     When user enters "b" for "newPassword"
     When user enters "b" for "confirmNewPassword"
@@ -131,7 +133,7 @@ Feature: User Profile
     And "errorsNewPassword" text should be "Must be at least 5 characters."
 
     When user enters "bb" for "confirmNewPassword"
-    Then "errorsConfirmNewPassword" should appear as "Must match Password."
+    Then "errorsConfirmNewPassword" text should appear as "Must match Password."
 
 
     When user clicks "nav-logout"
