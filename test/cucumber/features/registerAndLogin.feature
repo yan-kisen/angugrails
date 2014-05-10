@@ -11,10 +11,15 @@ Feature: Register and Log In
     Given user goes to "/home"
     Then "login-form" should appear
 
+  @current
   Scenario: A new user is registered and the user logs in successfully, followed by logging out.
 
     When user clicks "nav-register"
     Then "register-form" should appear
+    And "errorsUsername" should be blank
+    And "errorsEmail" should be blank
+    And "errorsPassword" should be blank
+    And "errorsConfirmPassword" should be blank
 
     When user enters "testuser1" for "username"
     When user enters "test@example.com" for "email"
@@ -26,8 +31,7 @@ Feature: Register and Log In
     When user enters "testuser1" for "username"
     When user enters "testpassword" for "password"
     When user clicks "submit"
-    Then "home-content" should appear
-    Then "home-content" text should be "This is the home page content, which can only be seen while you are authenticated."
+    Then "home-content" text should appear as "This is the home page content, which can only be seen while you are authenticated."
 
     When user clicks "nav-logout"
     Then "logout-form" should appear
@@ -41,7 +45,7 @@ Feature: Register and Log In
     When user enters "invalid" for "username"
     When user enters "invalid" for "password"
     When user clicks "submit"
-    Then "error-message" should appear
+    Then "errorMessage" should appear as "Access denied for given username and password."
 
   Scenario: An existing user logs in with valid credentials
 

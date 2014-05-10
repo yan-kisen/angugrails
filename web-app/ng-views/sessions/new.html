@@ -3,29 +3,32 @@
         <h2 class="col-md-7 col-md-offset-1">{{ 'LOGIN_TITLE' | translate }}</h2>
     </div>
     <div class="row">
-        <div class="alert alert-danger col-md-6 col-md-offset-1" id="error-message" ng-show="errorMessage">
+        <div class="alert alert-danger col-md-6 col-md-offset-1" id="errorMessage" ng-show="errorMessage">
             {{ errorMessage }}
         </div>
     </div>
     <form role="form" name="loginForm" id="login-form" class="form-horizontal" ng-submit="login()" novalidate>
-        <div class="form-group">
+
+        <div class="form-group" ng-class="{'has-error': loginForm.username.$invalid}">
             <label for="username" class="col-md-3 control-label">{{ 'USERNAME_LABEL' | translate }}</label>
-
-            <div>
-                <input class="col-md-3" type="text" id="username" name="username" placeholder="MemberName"
+            <div class="col-md-6">
+                <input class="col-md-3 form-control" type="text" id="username" name="username" placeholder="MemberName"
                        ng-model="username" validation="required">
-                <errors error="errors.username"></errors>
+                <errors id="errorsUsername" error="errors.username"></errors>
             </div>
         </div>
-        <div class="form-group">
-            <label for="password" class="col-md-3 control-label">{{ 'PASSWORD_LABEL' | translate }}</label>
 
-            <div>
-                <input class="col-md-3" type="password" id="password" name="password" placeholder="Password"
+
+        <div class="form-group" ng-class="{'has-error': loginForm.password.$invalid}">
+            <label for="password" class="col-md-3 control-label">{{ 'PASSWORD_LABEL' | translate }}</label>
+            <div class="col-md-6">
+                <input class="col-md-3 form-control" type="password" id="password" name="password" placeholder="Password"
                        ng-model="password" validation="required">
-                <errors error="errors.password"></errors>
+                <errors id="errorsPassword" error="errors.password"></errors>
             </div>
         </div>
+
+
         <div class="form-group">
             <div class="col-md-offset-3 col-md-6">
                 <button type="submit" id="submit" class="btn btn-primary col-md-3" ng-disabled="loginForm.$invalid">
@@ -33,6 +36,8 @@
                 </button>
             </div>
         </div>
+
     </form>
     ​
 </div>
+

@@ -5,6 +5,6 @@ angular.module('angugrails.directives')
             scope: {
                 error: '='
             },
-            template: '<span class="text-danger">{{ error }}</span>',
+            template: '<span class="text-danger">{{ error }}</span>'
         };
     });

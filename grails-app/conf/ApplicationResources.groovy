@@ -24,24 +24,45 @@ modules = {
         resource url:"js/lib/angular-validation.js", nominify: true
     }
 
-
-    'angugrails' {
-        dependsOn('angular-app')
-        dependsOn('angular-validation')
-        resource url: 'js/ng-app/angugrails.js', nominify:true
-        resource url: 'js/ng-app/language-translation.js', nominify: true
+    'angular-services' {
         resource url: 'js/ng-app/services/web-service-util.js', nominify:true
         resource url: 'js/ng-app/services/web-service.js', nominify:true
         resource url: 'js/ng-app/services/flash-service.js', nominify:true
-        resource url: "js/ng-app/directives/error-for.js", nominify: true
+    }
+
+    'angular-controllers' {
         resource url: 'js/ng-app/controllers/home.js', nominify:true
         resource url: 'js/ng-app/controllers/logout.js', nominify:true
-        resource url: 'js/ng-app/controllers/register.js', nominify:true
         resource url: 'js/ng-app/controllers/password.js', nominify:true
         resource url: 'js/ng-app/controllers/login.js', nominify:true
         resource url: 'js/ng-app/controllers/navigation.js', nominify:true
         resource url: 'js/ng-app/controllers/flash.js', nominify: true
+    }
+
+    'register-controller' {
+        resource url: 'js/ng-app/controllers/register.js', nominify:true
+    }
+
+    'angular-directives' {
+        resource url: "js/ng-app/directives/error-for.js", nominify: true
+    }
+
+    'angular-init' {
+        resource url: 'js/ng-app/angugrails.js', nominify:true
+        resource url: 'js/ng-app/language-translation.js', nominify: true
         resource url: 'js/ng-app/state-change-handler.js', nominify:true
+    }
+
+
+    'angugrails' {
+        dependsOn('angular-app')
+        dependsOn('angular-validation')
+        dependsOn('angular-init')
+        dependsOn('angular-services')
+        dependsOn('angular-directives')
+        dependsOn('angular-controllers')
+        dependsOn('register-controller')
+
     }
 
 

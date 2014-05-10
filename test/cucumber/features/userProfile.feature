@@ -1,11 +1,10 @@
-@current
+
 Feature: User Profile
   Background:
     Given the db is reset
     Given the db is loaded with new user. username: "user1" email: "testuser1@example.com" password: "testpassword1"
     Given user opens browser
     Then user goes to "/home"
-
 
   Scenario: User succesfully changes password.
     When user enters "user1" for "username"
@@ -31,7 +30,8 @@ Feature: User Profile
 
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
-    Then "submit" should be disabled
+    When user clicks "submit"
+    Then "errorMessage" should appear as "Access denied for given username and password."
 
 
     When user enters "beepbeep" for "password"
@@ -112,7 +112,7 @@ Feature: User Profile
     When user clicks "submit"
     Then "login-form" should appear
 
-
+  @current
   Scenario: User attempts to change password, enters new password that is too short.
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
@@ -127,6 +127,11 @@ Feature: User Profile
     When user enters "b" for "newPassword"
     When user enters "b" for "confirmNewPassword"
     Then "submit" should be disabled
+    And "errorsPassword" text should be "Required."
+    And "errorsNewPassword" text should be "Must be at least 5 characters."
+
+    When user enters "bb" for "confirmNewPassword"
+    Then "errorsConfirmNewPassword" should appear as "Must match Password."
 
 
     When user clicks "nav-logout"

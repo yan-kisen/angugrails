@@ -18,9 +18,9 @@ angular.module('angugrails.controllers').
         $scope.register = function () {
             $('input').checkAndTriggerAutoFillEvent();
             $scope.errorMessage = "";
-            $scope.submitted = true;
             FlashService.setStatusCode("");
             if ($scope.registerForm.$valid) {
+                $scope.submitted = true;
                 return WebService.register($scope.username,
                         $scope.email,
                         $scope.password).
@@ -35,6 +35,7 @@ angular.module('angugrails.controllers').
                             error = response.errors[i];
                             $scope.errors[error.field] = error.message;
                         }
+                        $scope.submitted = false;
                     });
             } else {
                 $scope.errorMessage = "Please correct errors below.";

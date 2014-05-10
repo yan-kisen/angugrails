@@ -35,22 +35,27 @@ grails.project.dependency.resolution = {
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         mavenRepo "http://repository.codehaus.org"
         mavenRepo "http://download.java.net/maven/2/"
-        mavenRepo 'https://oss.sonatype.org/content/repositories/snapshots'
+        // mavenRepo 'https://oss.sonatype.org/content/repositories/snapshots'
     }
 
     def gebVersion = "0.9.2"
-    def seleniumVersion = "2.32.0"
+    def seleniumVersion = "2.41.0"
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        runtime 'mysql:mysql-connector-java:5.1.27'
+        // runtime 'mysql:mysql-connector-java:5.1.27'
 
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
-        test "org.gebish:geb-junit4:$gebVersion"
+        compile "org.apache.httpcomponents:httpclient:4.3.3"
+        compile "xml-apis:xml-apis:1.4.01"
         compile "org.codehaus.groovy.modules.remote:remote-transport-http:0.5"
-        test("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1")
+        test "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1", {
+            excludes 'xml-apis', 'httpclient'
+        }
+        test "org.seleniumhq.selenium:selenium-htmlunit-driver:$seleniumVersion"
         compile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
         compile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+        test "org.gebish:geb-junit4:$gebVersion"
     }
 
     plugins {
