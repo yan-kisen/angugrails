@@ -94,6 +94,32 @@ Feature: User Profile
     When user clicks "submit"
     Then "login-form" should appear
 
+  @current
+  Scenario: User attempts to change password, enters password confirmation first.
+    When user enters "user1" for "username"
+    When user enters "testpassword1" for "password"
+    When user clicks "submit"
+
+    Then "home-content" should appear
+
+    When user clicks "nav-profile"
+    Then "profile-form" should appear
+
+    When user enters "password1" for "password"
+    When user enters "beepbeep1" for "confirmNewPassword"
+    Then "errorsConfirmNewPassword" text should be "Must match New Password."
+    And "submit" should be disabled
+
+    When user enters "beepbeep1" for "newPassword"
+    Then "errorsConfirmNewPassword" should be blank
+    And "submit" should be enabled
+
+    When user clicks "nav-logout"
+    Then "logout-form" should appear
+
+    When user clicks "submit"
+    Then "login-form" should appear
+
 
   Scenario: User attempts to change password, does not enter current password and fails.
     When user enters "user1" for "username"

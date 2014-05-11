@@ -56,6 +56,16 @@ Then(~'^"([^"]*)" should be disabled$') { String id ->
 }
 
 /**
+ * Then "[element-id]" should be enabled
+ */
+Then(~'^"([^"]*)" should be enabled$') { String id ->
+    def elem =  $('#' + id)
+    assert elem && elem.displayed && !elem.disabled
+}
+
+
+
+/**
  * Then "[element-id]" should not be visible
  */
 Then(~'^"([^"]*)" should be blank$') { String id ->

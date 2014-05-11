@@ -39,20 +39,7 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                 };
 
                 var sameValidator = function(element, value) {
-                    var resp = false;
-                    var elementValue = element.val();
-                    if (!value) {
-                        if (!elementValue) {
-                            resp = true;
-                        } else {
-                            resp = false;
-                        }
-                    } else if (!elementValue) {
-                        resp = true;
-                    } else if (value === elementValue) {
-                        resp = true;
-                    }
-                    return resp;
+                    return (value === element.val());
                 };
 
                 // We first need to see if the validation holds a regex, if it does treat it first
@@ -259,13 +246,27 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                                 };
                                 break;
                             case "same":
+                                var sourceElem = angular.element(document.querySelector('#'+params[1]));
+                                // TBD: add an event handler to update while the source field changes.
                                 validators[i] = sameValidator;
-                                patterns[i] = angular.element(document.querySelector('#'+params[1]));
+                                patterns[i] = sourceElem;
                                 messages[i] = {
                                     message: 'INVALID_SAME',
                                     params: [params[2]] // key for parameter replacement.
                                 };
                                 break;
+
+                            case "rechecksame":
+                                var dependElement = angular.element(document.querySelector('#'+params[1]));
+                                // TBD: add an event handler to update while the source field changes.
+                                validators[i] = sameValidator;
+                                patterns[i] = sourceElem;
+                                messages[i] = {
+                                    message: 'INVALID_SAME',
+                                    params: [params[2]] // key for parameter replacement.
+                                };
+                                break;
+
                             case "url" :
                                 patterns[i] = "(http|ftp|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%&amp;:/~\\+#]*[\\w\\-\\@?^=%&amp;/~\\+#])?";
                                 messages[i] = {
@@ -317,13 +318,17 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                     return isFieldValid;
                 }
 
+                var applyValidate = function() {
+                    scope.$apply(ctrl.$setValidity('validation', validate(ctrl.$modelValue)));
+                }
+
 
                 elm.bind('blur', function() {
-                    scope.$apply(ctrl.$setValidity('validation', validate(ctrl.$modelValue)));
+                    applyValidate();
                 });
 
                 elm.bind('keyup', function() {
-                    scope.$apply(ctrl.$setValidity('validation', validate(ctrl.$modelValue)));
+                    applyValidate();
                 })
 
 
