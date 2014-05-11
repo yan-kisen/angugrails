@@ -17,17 +17,17 @@ angular.module('angugrails.services').service('WebServiceUtil', function ($http,
         var errors = response.data.errors;
 
         if (httpStatus == 422) {
-            description = "One or more parameters are invalid.";
+            description = "HTTP_422";
         } else if (httpStatus == 400) {
-            description = "Unexpected application error.";
+            description = "HTTP_400";
         } else if (httpStatus == 404) {
-            description = "Url not found. Unexpected application error.";
+            description = "HTTP_404";
         } else if (httpStatus == 500) {
-            description = "Unexpected server error.";
+            description = "HTTP_500";
         } else if (httpStatus == 403) {
-            description = "Access denied for given username and password.";
+            description = "HTTP_403";
         } else {
-            description = "Unexpected server request error."
+            description = "HTTP_UNEXPECTED_ERROR";
         }
         $log.error("Http status response: " + httpStatus);
         return { httpStatus: httpStatus, description: description, errors: response.data.errors };

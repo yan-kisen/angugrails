@@ -2,7 +2,7 @@
     <h2>{{ 'REGISTER_TITLE' | translate }}</h2>
 
     <div class="alert alert-danger" id="errorMessage" ng-show="errorMessage">
-        {{ errorMessage }}
+        {{ errorMessage | translate }}
     </div>
     <form role="form" class="form-horizontal" id="register-form" name="registerForm" ng-submit="register()" novalidate>
         <div class="form-group"  ng-class="{'has-error': registerForm.username.$invalid}">

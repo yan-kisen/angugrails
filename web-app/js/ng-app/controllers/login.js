@@ -40,7 +40,7 @@ angular.module('angugrails.controllers').
                         }
                     });
             } else {
-                $scope.errorMessage = "Please correct errors below.";
+                $scope.errorMessage = "INVALID_FORM";
             }
         };
 

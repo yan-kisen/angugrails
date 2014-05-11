@@ -34,6 +34,16 @@
     "CONFIRM_NEW_PASSWORD_LABEL": "Confirm New Password",
     "STATUS_PASSWORD_CHANGED": "Your profile has been changed",
 
+    "HTTP_422": "One or more parameters are invalid.",
+    "HTTP_400": "Unexpected application error.",
+    "HTTP_404": "Url not found. Unexpected application error.",
+    "HTTP_500": "Unexpected server error.",
+    "HTTP_403": "Access denied for given username and password.",
+    "HTTP_UNEXPECTED_ERROR": "Unexpected server request error.",
+
+    "INVALID_FORM": "One or more form field values are invalid.",
+
+
 
     "INVALID_ALPHA":            "May only contain letters. ",
     "INVALID_ALPHA_SPACE":      "May only contain letters and spaces. ",

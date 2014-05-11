@@ -13,7 +13,7 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
             require: "ngModel",
             link: function(scope, elm, attrs, ctrl) {
                 // default validation event that triggers the validation error to be displayed
-                var DEFAULT_EVENT = "keyup";         // keyup, blur, ...
+                var DEFAULT_EVENT = "blur";         // keyup, blur, ...
 
 
                 // get the validation attribute
@@ -35,7 +35,7 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                 };
 
                 var requiredValidator = function(pattern, value) {
-                    return ((typeof value !== "undefined") && (value !== ""));
+                    return ((typeof value !== "undefined") && (value !== null) && (value !== ""));
                 };
 
                 var sameValidator = function(element, value) {
@@ -54,10 +54,6 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                     }
                     return resp;
                 };
-
-                // by default we'll consider field not required if not required then no need to validate empty value..right
-                // if validation attribute calls it then we'll validate
-                var isFieldRequired = false;
 
                 // We first need to see if the validation holds a regex, if it does treat it first
                 // So why treat it separately? Because a Regex might hold pipe '|' and so we don't want to mix it with our regular validation pipe
@@ -256,7 +252,6 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                                 };
                                 break;
                             case "required" :
-                                isFieldRequired = true;
                                 validators[i] = requiredValidator;
                                 patterns[i] = "\\S+";
                                 messages[i] = {
@@ -313,9 +308,6 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                         } // end !isValid
                     } // end for loop
 
-                    // -- Error Display --//
-                    /* updateErrorMsg(isFieldValid, message);     */
-
                     var field = attrs.id;
 
                     /* an empty message from client validation should erase any previous server error for this field */
@@ -326,121 +318,18 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                 }
 
 
+                elm.bind('blur', function() {
+                    scope.$apply(ctrl.$setValidity('validation', validate(ctrl.$modelValue)));
+                });
 
+                elm.bind('keyup', function() {
+                    scope.$apply(ctrl.$setValidity('validation', validate(ctrl.$modelValue)));
+                })
 
-                /** in general we will display error message at the next element after our input
-                 * but in some cases user want to define which DOM id to display error (as validation attribute)
-                 * @param bool isFieldValid: is the field valid?
-                 * @param string message: error message to display
-                 */
-                var updateErrorMsg = function(isFieldValid, message) {
-                    /* original code that updates a view element with the error message
-                    var errorElm = (typeof attrs.validationErrorTo !== "undefined")
-                        ? angular.element(document.querySelector('#'+attrs.validationErrorTo))
-                        : elm.next();
-                        */
-                    /* my updated code that updates a controller error attribute based on errormessage attribute */
-
-
-
-                    // Re-Render Error display element inside the <span> or <div>
-                    /*
-                    if(typeof errorElm !== "undefined") {
-                        if(!isFieldValid && ctrl.$dirty) {
-                            // Not valid & dirty, display the message
-                            errorElm.text(message);
-                        }else {
-                            // element is prestine, error message has to be blank
-                            errorElm.text("");
-                        }
-                    }
-                    */
-                }
-
-                /** Validator function to attach to the element, this will get call whenever the input field is updated
-                 *  and is also customizable through the (validation-event) which can be (onblur).
-                 *  If no event is specified, it will validate (onkeyup) as a default action.
-                 * @param string value: value of the input field
-                 */
-                var validator = function(value) {
-                    // if field is not required and his value is empty
-                    // then no need to validate & return it valid
-                    if(!isFieldRequired && (value === "" || typeof value === "undefined")) {
-                        var isFieldValid = true;
-                        ctrl.$setValidity('validation', isFieldValid);
-                        updateErrorMsg(isFieldValid, "");
-                        elm.unbind('keyup').unbind('keydown');
-                        return value;
-                    }
-
-                    // analyze which event we'll use, if nothing was defined then use default
-                    // also remove prefix substring of 'on' since we don't need it on the 'on' method
-                    var evnt = (typeof attrs.validationEvent === "undefined") ? DEFAULT_EVENT : attrs.validationEvent;
-                    evnt = evnt.replace('on', ''); // remove possible 'on' prefix
-
-                    // get some properties of the inspected element
-                    var elmTagName = elm.prop('tagName').toUpperCase();
-                    var elmType = elm.prop('type').toUpperCase();
-
-                    // We seem to have little problems validating a field of <input type="number">
-                    // as angular reports undefined value even though user types chars
-                    // so we'll simply block chars completely except numbers and decimal
-                    if(elmTagName === "INPUT" && elmType === "NUMBER") {
-                        elm.bind('keydown', function(evt) {
-                            var charCode = (evt.which) ? evt.which : ((typeof event !== "undefined") ? event.keyCode : undefined);
-                            if(typeof charCode === "undefined") {
-                                evt.preventDefault();
-                                return false;
-                            }
-
-                            if (charCode > 31 && (charCode != 46 && ((charCode < 48 || charCode > 57) && charCode < 96 || charCode > 105)) && (charCode != 190 && charCode != 110 && charCode != 109 && charCode != 173)) {
-                                evt.preventDefault();
-                                return false;
-                            }else {
-                                return true;
-                            }
-                        });
-                    }
-
-                    // Also make sure that if user has a select dropdown
-                    // then we'll validate it has if it was a onBlur event
-                    // since onKeyUp would fail has there would never be any keyup
-                    if(elmTagName === "SELECT") {
-                        if(isFieldRequired && (value === "" || typeof value === "undefined")) {
-                            // if select option is null or empty string we already know it's invalid
-                            // but we'll still run validation() to display proper error message
-                            ctrl.$setValidity('validation', validate(value));
-                            elm.unbind('blur');
-                            return value;
-                        }
-                        // else we'll make sure we use an onBlur event to check validation
-                        evnt = "blur";
-                    }
-
-                    // invalidate field before doing validation
-                    ctrl.$setValidity('validation', false);
-
-                    // in case the field is already pre-filled
-                    // we need to validate it without looking at the event binding
-                    if(value !== "" && typeof value !== "undefined") {
-                        var isValid = validate(value);
-                        ctrl.$setValidity('validation', isValid);
-                    }
-
-                    // run the validate method on the event
-                    // update the validation on both the field & form element
-                    elm.unbind('keyup').unbind(evnt).bind(evnt, function() {
-                        // make the regular validation of the field value
-                        var isValid = validate(value);
-                        scope.$apply(ctrl.$setValidity('validation', isValid));
-                    });
-
-                    return value;
-                };
 
                 // attach the Validator object to the element
-                ctrl.$parsers.unshift(validator);
-                ctrl.$formatters.unshift(validator);
+                // ctrl.$parsers.unshift(validator);
+                // ctrl.$formatters.unshift(validator);
 
                 // for the case of field that might be ng-disabled, we should skip validation
                 // Observe the angular disabled attribute
@@ -448,9 +337,6 @@ angular.module('ghiscoding.validation', ['pascalprecht.translate'])
                     if(disabled){
                         // Turn off validation when disabled
                         ctrl.$setValidity('validation', true);
-                    } else {
-                        // Re-Validate the input when enabled
-                        ctrl.$setValidity('validation', validate(ctrl.$viewValue));
                     }
                 });
             }

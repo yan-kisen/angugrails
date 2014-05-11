@@ -11,7 +11,6 @@ Feature: Register and Log In
     Given user goes to "/home"
     Then "login-form" should appear
 
-  @current
   Scenario: A new user is registered and the user logs in successfully, followed by logging out.
 
     When user clicks "nav-register"

@@ -39,7 +39,7 @@ angular.module('angugrails.controllers').
                     });
             } else {
                 // this should in theory not be called if form button is disabled when form is not valid.
-                $scope.errorMessage = "Please correct errors below.";
+                $scope.errorMessage = "INVALID_FORM";
             }
         };
     }).
