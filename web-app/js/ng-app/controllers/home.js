@@ -12,7 +12,7 @@ angular.module('angugrails.controllers').
             url: '/',
             views: {
                 "navigation": { templateUrl: '/angugrails/ng-views/navigation.html', controller: 'NavigationCtrl' },
-                "flash": { templateUrl: '/angugrails/ng-views/flash.html', controller: 'FlashCtrl'},
+                "alert": { templateUrl: '/angugrails/ng-views/alert.html', controller: 'AlertCtrl'},
                 "content": { templateUrl: '/angugrails/ng-views/home.html', controller: 'HomeCtrl' }
             }
         });

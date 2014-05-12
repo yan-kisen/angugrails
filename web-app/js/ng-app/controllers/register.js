@@ -1,15 +1,13 @@
 //
 angular.module('angugrails.controllers').
-    controller('RegisterCtrl',function RegisterController($scope, $state, $log, WebService, FlashService) {
+    controller('RegisterCtrl',function RegisterController($scope, $state, $log, WebService, AlertService) {
 
         $scope.reset = function () {
             $scope.username = null;
             $scope.email = null;
             $scope.password = null;
             $scope.passwordConfirm = null;
-            $scope.errorMessage = "";
             $scope.errors = {};
-            $scope.submitted = false;
 
         };
 
@@ -18,19 +16,18 @@ angular.module('angugrails.controllers').
         $scope.register = function () {
             $('input').checkAndTriggerAutoFillEvent();
             $scope.errorMessage = "";
-            FlashService.setStatusCode("");
+            AlertService.reset();
             if ($scope.registerForm.$valid) {
-                $scope.submitted = true;
                 return WebService.register($scope.username,
                         $scope.email,
                         $scope.password).
                     then(function () {
                         $state.go('home');
-                        FlashService.setStatusCode('STATUS_REGISTERED');
+                        AlertService.passed('STATUS_REGISTERED');
                     }, function (response) {
                         var error;
 
-                        $scope.errorMessage = response.description;
+                        AlertService.failed(response.description);
                         for (var i =0; i < response.errors.length; i++) {
                             error = response.errors[i];
                             $scope.errors[error.field] = error.message;
@@ -38,7 +35,7 @@ angular.module('angugrails.controllers').
                         $scope.submitted = false;
                     });
             } else {
-                $scope.errorMessage = "INVALID_FORM";
+                AlertService.failed("INVALID_FORM");
             }
         };
     }).
@@ -48,7 +45,7 @@ angular.module('angugrails.controllers').
                 noAuthRequired: true,
                 views: {
                     "navigation": { templateUrl: '/angugrails/ng-views/navigation.html', controller: 'NavigationCtrl'},
-                    "flash": { templateUrl: '/angugrails/ng-views/flash.html', controller: 'FlashCtrl'},
+                    "alert": { templateUrl: '/angugrails/ng-views/alert.html', controller: 'AlertCtrl'},
                     "content": { templateUrl: '/angugrails/ng-views/registrations/new.html', controller: 'RegisterCtrl'}
                 }
             });

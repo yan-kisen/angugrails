@@ -1,18 +1,18 @@
 //
 angular.module('angugrails.controllers').
-    controller('LogoutCtrl',function LogoutController($scope, $state, $log, WebService, FlashService) {
+    controller('LogoutCtrl',function LogoutController($scope, $state, $log, WebService, AlertService) {
 
 
         $scope.logout = function () {
-            FlashService.setStatusCode("");
+            AlertService.reset();
             WebService.logout().then(
                 function () {
                     $state.go('login');
-                    FlashService.setStatusCode("STATUS_LOGGED_OUT");
+                    AlertService.passed("STATUS_LOGGED_OUT");
                 },
                 function () {
                     $state.go('login');
-                    FlashService.setStatusCode("STATUS_LOGGED_OUT");
+                    AlertService.passed("STATUS_LOGGED_OUT");
                 }
             )
         };
@@ -22,7 +22,7 @@ angular.module('angugrails.controllers').
             'logout', {
                 views: {
                     "navigation": { templateUrl: '/angugrails/ng-views/navigation.html', controller: 'NavigationCtrl'},
-                    "flash": { templateUrl: '/angugrails/ng-views/flash.html', controller: 'FlashCtrl'},
+                    "alert": { templateUrl: '/angugrails/ng-views/alert.html', controller: 'AlertCtrl'},
                     "content": { templateUrl: '/angugrails/ng-views/sessions/delete.html', controller: 'LogoutCtrl'}
                 }
             });

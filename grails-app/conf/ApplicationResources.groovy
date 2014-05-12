@@ -27,7 +27,7 @@ modules = {
     'angular-services' {
         resource url: 'js/ng-app/services/web-service-util.js', nominify:true
         resource url: 'js/ng-app/services/web-service.js', nominify:true
-        resource url: 'js/ng-app/services/flash-service.js', nominify:true
+        resource url: 'js/ng-app/services/alert-service.js', nominify:true
         resource url: 'js/ng-app/services/run-service.js', nominify:true
     }
 
@@ -37,7 +37,7 @@ modules = {
         resource url: 'js/ng-app/controllers/password.js', nominify:true
         resource url: 'js/ng-app/controllers/login.js', nominify:true
         resource url: 'js/ng-app/controllers/navigation.js', nominify:true
-        resource url: 'js/ng-app/controllers/flash.js', nominify: true
+        resource url: 'js/ng-app/controllers/alert.js', nominify: true
     }
 
     'register-controller' {

@@ -1,31 +1,30 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="navbar navbar-default" bs-navbar>
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/"></a>
-                </div>
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
                 <ul class="nav navbar-nav">
                     <li data-match-route="/(:?home)">
                         <a ui-sref="home" id="nav-home">{{ 'NAV_HOME_LABEL' | translate }}</a>
                     </li>
-                    <li data-match-route="/login" ng-hide="isAuthenticated">
-                        <a ui-sref="login" id="nav-login">{{ 'NAV_LOGIN_LABEL' | translate }}</a>
-                    </li>
-                    <li data-match-route="/logout" ng-show="isAuthenticated">
-                        <a ui-sref="logout" id="nav-logout">{{ 'NAV_LOGOUT_LABEL' | translate }}</a>
-                    </li>
-                    <li ng-hide="isAuthenticated">
-                        <a ui-sref="register" id="nav-register">{{'NAV_REGISTER_LABEL' | translate }}</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" ng-show="isAuthenticated">
-                    <li>
-                        <a ui-sref="changePassword" id="nav-profile">{{ 'NAV_CHANGE_PROFILE' | translate }}</a>
-                    </li>
                 </ul>
             </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-hide="isAuthenticated">
+                    <a ui-sref="register" id="nav-register">{{'NAV_REGISTER_LABEL' | translate }}</a>
+                </li>
+                <li data-match-route="/login" ng-hide="isAuthenticated">
+                    <a ui-sref="login" id="nav-login">{{ 'NAV_LOGIN_LABEL' | translate }}</a>
+                </li>
+                <li ng-show="isAuthenticated">
+                    <a ui-sref="changePassword" id="nav-profile">{{ 'NAV_CHANGE_PROFILE' | translate }}</a>
+                </li>
+                <li data-match-route="/logout" ng-show="isAuthenticated">
+                    <a ui-sref="logout" id="nav-logout">{{ 'NAV_LOGOUT_LABEL' | translate }}</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
+
 

@@ -1,6 +1,6 @@
 //
 angular.module('angugrails.controllers').
-    controller('PasswordCtrl',function PasswordController($scope, $state, $log, WebService, FlashService) {
+    controller('PasswordCtrl',function PasswordController($scope, $state, $log, WebService, AlertService) {
 
         $scope.reset = function () {
             $scope.password = null;
@@ -18,16 +18,16 @@ angular.module('angugrails.controllers').
             $('input').checkAndTriggerAutoFillEvent();
             $scope.errorMessage = "";
             $scope.submitted = true;
-            FlashService.setStatusCode("");
+            AlertService.reset();
             if ($scope.passwordForm.$valid) {
                 $scope.errorMessage = "";
                 $scope.errors['password'] = "";
                 return WebService.changePassword($scope.password, $scope.newPassword).
                     then(function () {
                         $state.go('home');
-                        FlashService.setStatusCode('STATUS_PASSWORD_CHANGED');
+                        AlertService.passed('STATUS_PASSWORD_CHANGED');
                     }, function (response) {
-                        $scope.errorMessage = response.description;
+                        AlertService.failed(response.description);
                         if (response.httpStatus === 403) {
                             $scope.errors['password'] = "Invalid Password.";
                         } else {
@@ -39,7 +39,7 @@ angular.module('angugrails.controllers').
                     });
             } else {
                 // this should in theory not be called if form button is disabled when form is not valid.
-                $scope.errorMessage = "INVALID_FORM";
+                AlertService.failed("INVALID_FORM");
             }
         };
     }).
@@ -49,7 +49,7 @@ angular.module('angugrails.controllers').
                 noAuthRequired: false,
                 views: {
                     "navigation": { templateUrl: '/angugrails/ng-views/navigation.html', controller: 'NavigationCtrl'},
-                    "flash": { templateUrl: '/angugrails/ng-views/flash.html', controller: 'FlashCtrl'},
+                    "alert": { templateUrl: '/angugrails/ng-views/alert.html', controller: 'AlertCtrl'},
                     "content": { templateUrl: '/angugrails/ng-views/registrations/edit-password.html', controller: 'PasswordCtrl'}
                 }
             });

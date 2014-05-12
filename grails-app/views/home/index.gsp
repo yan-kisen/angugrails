@@ -6,13 +6,10 @@
     </head>
 
     <body>
-        <div class="row">
-            <div class="col-sm-12 col-md-12">
-
-                <div ui-view="navigation"></div>
-                <div ui-view="flash"></div>
-                <div ui-view="content"></div>
-            </div>
+        <div class="container">
+            <div ui-view="navigation"></div>
+            <div id="flash-message" ui-view="alert"></div>
+            <div id="content" ui-view="content"></div>
         </div>
     </body>
 </html>

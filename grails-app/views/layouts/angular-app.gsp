@@ -9,11 +9,7 @@
 </head>
 <body>
 <div id="main" role="main">
-    <div class="container">
-        <div class="content">
-            <g:layoutBody/>
-        </div>
-    </div>
+   <g:layoutBody/>
 </div>
 <r:layoutResources/>
 </body>

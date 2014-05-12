@@ -1,59 +1,59 @@
-<div class="col-md-8 col-md-offset-2">
-    <h2>{{ 'REGISTER_TITLE' | translate }}</h2>
 
-    <div class="alert alert-danger" id="errorMessage" ng-show="errorMessage">
-        {{ errorMessage | translate }}
+    <div class="row text-center">
+        <h3>{{ 'REGISTER_TITLE' | translate }}</h3>
     </div>
-    <form role="form" class="form-horizontal" id="register-form" name="registerForm" ng-submit="register()" novalidate>
-        <div class="form-group"  ng-class="{'has-error': registerForm.username.$invalid}">
-            <label for="username" class="col-md-3 control-label">{{ 'USERNAME_LABEL' | translate }}</label>
-            <div class="col-md-6">
-                <input type="text" id="username" name="username" class="col-md-3 form-control"
-                       placeholder="{{ 'USERNAME_LABEL' | translate }}"
-                       ng-model="username" validation="required|min_len:3"/>
-                <errors id="errorsUsername" field="username" error="errors.username"></errors>
+    <div class="row">
+        <form role="form" class="form-horizontal" id="register-form" name="registerForm" ng-submit="register()" novalidate>
+            <div class="form-group"  ng-class="{'has-error': registerForm.username.$invalid}">
+                <label for="username" class="col-md-3 control-label">{{ 'USERNAME_LABEL' | translate }}</label>
+                <div class="col-md-6">
+                    <input type="text" id="username" name="username" class="col-md-3 form-control"
+                           placeholder="{{ 'USERNAME_LABEL' | translate }}"
+                           ng-model="username" validation="required|min_len:3"/>
+                    <errors id="errorsUsername" field="username" error="errors.username"></errors>
+                </div>
             </div>
-        </div>
-        <div class="form-group"  ng-class="{'has-error': registerForm.email.$invalid}">
-            <label for="email" class="col-md-3 control-label">{{ 'EMAIL_LABEL' | translate }}</label>
+            <div class="form-group"  ng-class="{'has-error': registerForm.email.$invalid}">
+                <label for="email" class="col-md-3 control-label">{{ 'EMAIL_LABEL' | translate }}</label>
 
-            <div class="col-md-6">
-                <input type="text" id="email" name="email" class="col-md-3 form-control"
-                       placeholder="{{ 'EMAIL_LABEL' | translate }}"
-                       ng-model="email" validation="required|email|min_len:3"/>
-                <errors field="email" id="errorsEmail" error="errors.email"></errors>
+                <div class="col-md-6">
+                    <input type="text" id="email" name="email" class="col-md-3 form-control"
+                           placeholder="{{ 'EMAIL_LABEL' | translate }}"
+                           ng-model="email" validation="required|email|min_len:3"/>
+                    <errors field="email" id="errorsEmail" error="errors.email"></errors>
+                </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error': registerForm.password.$invalid}">
-            <label for="password" class="col-md-3 control-label">{{ 'PASSWORD_LABEL' | translate }}</label>
+            <div class="form-group" ng-class="{'has-error': registerForm.password.$invalid}">
+                <label for="password" class="col-md-3 control-label">{{ 'PASSWORD_LABEL' | translate }}</label>
 
-            <div class="col-md-6">
-                <input type="password" id="password" class="col-md-3  form-control" name="password"
-                       placeholder="{{ 'PASSWORD_LABEL' | translate }}"
-                       ng-model="password" validation="required|alpha_dash_spaces|min_len:5"
-                       ng-class="{'has-error': registerForm.password.$invalid}"/>
-                <errors field="password" id="errorsPassword" error="errors.password"></errors>
+                <div class="col-md-6">
+                    <input type="password" id="password" class="col-md-3  form-control" name="password"
+                           placeholder="{{ 'PASSWORD_LABEL' | translate }}"
+                           ng-model="password" validation="required|alpha_dash_spaces|min_len:5"
+                           ng-class="{'has-error': registerForm.password.$invalid}"/>
+                    <errors field="password" id="errorsPassword" error="errors.password"></errors>
+                </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error': registerForm.passwordConfirm.$invalid}" >
-            <label for="passwordConfirm" class="col-md-3 control-label">{{ 'CONFIRM_PASSWORD_LABEL' | translate }}
-            </label>
+            <div class="form-group" ng-class="{'has-error': registerForm.passwordConfirm.$invalid}" >
+                <label for="passwordConfirm" class="col-md-3 control-label">{{ 'CONFIRM_PASSWORD_LABEL' | translate }}
+                </label>
 
-            <div class="col-md-6">
-                <input type="password" id="passwordConfirm" class="col-md-3  form-control" name="passwordConfirm"
-                       placeholder="{{ 'PASSWORD_LABEL' | translate }}" ng-model="passwordConfirm"
-                       validation="same:password:PASSWORD_LABEL"
-                       ng-class="{'has-error': registerForm.passwordConfirm.$invalid}"/>
-                <errors field="passwordConfirm" id="errorsPasswordConfirm" error="errors.passwordConfirm"></errors>
+                <div class="col-md-6">
+                    <input type="password" id="passwordConfirm" class="col-md-3  form-control" name="passwordConfirm"
+                           placeholder="{{ 'PASSWORD_LABEL' | translate }}" ng-model="passwordConfirm"
+                           validation="same:password:PASSWORD_LABEL"
+                           ng-class="{'has-error': registerForm.passwordConfirm.$invalid}"/>
+                    <errors field="passwordConfirm" id="errorsPasswordConfirm" error="errors.passwordConfirm"></errors>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-3 col-md-6">
-                <button type="submit" id="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">
-                    {{ 'REGISTER_BUTTON' | translate }}
-                </button>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-6">
+                    <button type="submit" id="submit" class="btn btn-primary" ng-disabled="registerForm.$invalid">
+                        {{ 'REGISTER_BUTTON' | translate }}
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
     ​
 </div>
