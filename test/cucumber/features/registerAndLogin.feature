@@ -38,13 +38,13 @@ Feature: Register and Log In
     When user clicks "submit"
     Then "login-form" should appear
 
-
+ @current
  Scenario: A user attempts to login with invalid credentials
 
     When user enters "invalid" for "username"
     When user enters "invalid" for "password"
     When user clicks "submit"
-    Then "errorMessage" text should appear as "Access denied for given username and password."
+    Then the error message should be "Access denied for given username and password."
 
   Scenario: An existing user logs in with valid credentials
 

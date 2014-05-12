@@ -63,6 +63,21 @@ Then(~'^"([^"]*)" should be enabled$') { String id ->
     assert elem && elem.displayed && !elem.disabled
 }
 
+/**
+ * Then the error message should be "[error message]"
+ */
+Then(~'^the error message should be "([^"]*)"') { String message ->
+    assertAlert('alert-danger', message)
+}
+
+/**
+ * Then the confirmation message should be "[confirmation message]"
+ */
+Then(~'^the confirmation message should be "([^"]*)"') { String message ->
+    assertAlert('alert-success', message)
+}
+
+
 
 
 /**
@@ -111,7 +126,14 @@ Then(~'^"([^"]*)" text should be "([^"]*)"$') { String id, String text ->
     compareText(id, text)
 }
 
-
+def assertAlert(String cssClass, String message) {
+    def elem =  $('#statusMessage')
+    waitFor {
+        elem && elem.displayed
+    }
+    assert elem.classes().find { it == cssClass }
+    compareText('statusMessage', message)
+}
 
 def compareText(String elementId, String testText) {
     def cleanText = testText.replaceAll(/\s+/, " ")

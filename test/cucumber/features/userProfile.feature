@@ -31,7 +31,7 @@ Feature: User Profile
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
     When user clicks "submit"
-    Then "errorMessage" text should appear as "Access denied for given username and password."
+    Then the error message should be "Access denied for given username and password."
 
 
     When user enters "beepbeep" for "password"
@@ -45,7 +45,7 @@ Feature: User Profile
     Then "login-form" should appear
 
 
-  @current
+
   Scenario: User attempts to change password, enters invalid current password.
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
@@ -60,7 +60,7 @@ Feature: User Profile
     When user enters "beepbeep" for "newPassword"
     When user enters "beepbeep" for "confirmNewPassword"
     When user clicks "submit"
-    Then "errorMessage" text should appear as "Access denied for given username and password."
+    Then the error message should be "Access denied for given username and password."
 
     When user clicks "nav-logout"
     Then "logout-form" should appear
@@ -94,7 +94,7 @@ Feature: User Profile
     When user clicks "submit"
     Then "login-form" should appear
 
-  @current
+
   Scenario: User attempts to change password, enters password confirmation first.
     When user enters "user1" for "username"
     When user enters "testpassword1" for "password"
