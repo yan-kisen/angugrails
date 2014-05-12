@@ -15,10 +15,10 @@ Feature: Register and Log In
 
     When user clicks "nav-register"
     Then "register-form" should appear
-    And "errorsUsername" should be blank
-    And "errorsEmail" should be blank
-    And "errorsPassword" should be blank
-    And "errorsConfirmPassword" should be blank
+    And error for "Username" should be blank
+    And error for "Email" should be blank
+    And error for "Password" should be blank
+    And error for "ConfirmPassword" should be blank
 
     When user enters "testuser1" for "username"
     When user enters "test@example.com" for "email"
@@ -26,25 +26,27 @@ Feature: Register and Log In
     When user enters "testpassword" for "password-confirm"
     When user clicks "submit"
     Then "login-form" should appear
+    And the success alert should be "The account is now registered"
 
     When user enters "testuser1" for "username"
     When user enters "testpassword" for "password"
     When user clicks "submit"
     Then "home-content" text should appear as "This is the home page content, which can only be seen while you are authenticated."
+    And the success alert should be "You are now signed in"
 
     When user clicks "nav-logout"
     Then "logout-form" should appear
 
     When user clicks "submit"
     Then "login-form" should appear
+    And the success alert should be "You are logged out"
 
- @current
  Scenario: A user attempts to login with invalid credentials
 
     When user enters "invalid" for "username"
     When user enters "invalid" for "password"
     When user clicks "submit"
-    Then the error message should be "Access denied for given username and password."
+    Then the error alert should be "Access denied for given username and password"
 
   Scenario: An existing user logs in with valid credentials
 

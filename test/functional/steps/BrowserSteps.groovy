@@ -66,14 +66,14 @@ Then(~'^"([^"]*)" should be enabled$') { String id ->
 /**
  * Then the error message should be "[error message]"
  */
-Then(~'^the error message should be "([^"]*)"') { String message ->
+Then(~'^the error alert should be "([^"]*)"') { String message ->
     assertAlert('alert-danger', message)
 }
 
 /**
  * Then the confirmation message should be "[confirmation message]"
  */
-Then(~'^the confirmation message should be "([^"]*)"') { String message ->
+Then(~'^the success alert should be "([^"]*)"') { String message ->
     assertAlert('alert-success', message)
 }
 
@@ -124,6 +124,20 @@ Then(~'^"([^"]*)" text should appear as "([^"]*)"$') { String id, String text->
  */
 Then(~'^"([^"]*)" text should be "([^"]*)"$') { String id, String text ->
     compareText(id, text)
+}
+
+Then(~'^error for "([^"]*)" should be "([^"]*)"$') { String field, String text ->
+    compareText('errors' + field, text)
+}
+
+Then(~'^error for "([^"]*)" should be blank$') { String field ->
+    assertBlank('errors' + field)
+}
+
+
+def assertBlank(String elementId) {
+    def element =  $('#' + elementId)
+    assert (!element || !element.displayed || element.text() == "")
 }
 
 def assertAlert(String cssClass, String message) {
