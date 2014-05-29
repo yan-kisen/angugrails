@@ -109,7 +109,6 @@ Client Features and Modules
 TBD, maybe someday
 ------------------
 
-  * integration tests for the grails application.
   * complete the rest of the cucumber functional tests for the full application.
   * jasmine and other unit tests for the javascript angular application.
   * write a new angular-validation plugin that incorporates server and client validation handling like this does. 

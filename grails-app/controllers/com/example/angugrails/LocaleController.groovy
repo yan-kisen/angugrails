@@ -17,7 +17,7 @@ class LocaleController {
         if (!iStream) {
             render(status: 404)
         }  else {
-            render (contentType: 'application/json', file: iStream)
+            render (contentType: 'application/json;charset=UTF-8', file: iStream)
         }
     }
 }
